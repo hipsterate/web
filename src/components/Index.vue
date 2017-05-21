@@ -6,8 +6,9 @@
         Hipsterate
       </q-toolbar-title>
 
-      <button @click="signInDialog">
+      <button @click="signIn">
         <i>supervisor_account</i>
+        Sign in with last.fm
       </button>
     </div>
 
@@ -18,39 +19,14 @@
 </template>
 
 <script>
-import { Dialog, Toast } from 'quasar'
-
 export default {
   data () {
     return {
     }
   },
   methods: {
-    signInDialog: function () {
-      Dialog.create({
-        title: 'Sign In',
-        message: 'Sign in with your last.fm account',
-        form: {
-          account: {
-            type: 'textbox',
-            label: 'Account',
-            model: ''
-          },
-          password: {
-            type: 'password',
-            label: 'Password',
-            model: ''
-          }
-        },
-        buttons: [
-          {
-            label: 'Sign In',
-            handler (signInData) {
-              Toast.create.positive(`Welcome, ${signInData.account}`)
-            }
-          }
-        ]
-      })
+    signIn: function (account, password) {
+      window.open('http://www.last.fm/api/auth/?api_key=e2c460467c4b6747ed648d0bfa84463c&cb=http://localhost:8080/#/signincallback')
     }
   }
 }
