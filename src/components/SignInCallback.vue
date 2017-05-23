@@ -7,7 +7,7 @@ import xml2js from 'xml2js'
 import store from '../store'
 
 export default {
-  mounted () {
+  created () {
     const token = this.$route.query.token
     const apiSig = md5(`api_key${process.env.LASTFM_API_KEY}methodauth.getSessiontoken${token}5e3113279a15f96d96cf9e65fd8a985b`)
 
@@ -20,6 +20,7 @@ export default {
         }
 
         const session = result.lfm.session[0]
+        store.setIsAuth(true)
         store.setUser(session.name[0])
         store.setSession(session.key[0])
       })

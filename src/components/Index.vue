@@ -6,9 +6,12 @@
         Hipsterate
       </q-toolbar-title>
 
-      <button @click="signIn">
+      <button v-if="!store.state.isAuth" @click="signIn">
         <i>supervisor_account</i>
         Sign in with last.fm
+      </button>
+      <button v-else>
+        {{ store.state.user }}
       </button>
     </div>
 
@@ -19,9 +22,12 @@
 </template>
 
 <script>
+import store from '../store'
+
 export default {
   data () {
     return {
+      store: store
     }
   },
   methods: {
@@ -31,6 +37,3 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus">
-</style>
