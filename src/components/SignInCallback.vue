@@ -3,8 +3,8 @@
 
 <script>
 export default {
-  created () {
-    alert('finished!')
+  mounted () {
+    console.log(this.$route.query)
   }
 }
 </script>

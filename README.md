@@ -1,6 +1,6 @@
-# Quasar App
+# Hipsterate
 
-> A Quasar project
+> Rating your last.fm albums!
 
 ## Build Setup
 

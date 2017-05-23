@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     signIn: function (account, password) {
-      window.open('http://www.last.fm/api/auth/?api_key=e2c460467c4b6747ed648d0bfa84463c&cb=http://localhost:8080/#/signincallback')
+      window.open('http://www.last.fm/api/auth/?api_key=e2c460467c4b6747ed648d0bfa84463c&cb=http://localhost:8080/signincallback')
     }
   }
 }
