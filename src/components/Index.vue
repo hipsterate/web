@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     signIn: function (account, password) {
-      window.open(`${process.env.LASTFM_API_URL}/auth/?api_key=${process.env.LASTFM_API_KEY}&cb=${process.env.SIGNIN_REDIRECT}`)
+      window.open(`${process.env.LASTFM_AUTH_PAGE}/auth/?api_key=${process.env.LASTFM_API_KEY}&cb=${process.env.SIGNIN_REDIRECT}`)
     }
   }
 }

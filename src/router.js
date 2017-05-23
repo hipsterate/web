@@ -10,8 +10,8 @@ function load (component) {
 export default new VueRouter({
   mode: 'history',
   routes: [
-    { path: '/', component: load('Index') },
-    { path: '/signincallback', component: load('SignInCallback') },
+    { path: '/', component: load('Index'), name: 'index' },
+    { path: '/signincallback', component: load('SignInCallback'), name: 'signin-callback' },
     { path: '*', component: load('Error404') }
   ]
 })
