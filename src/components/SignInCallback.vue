@@ -16,7 +16,7 @@ export default {
     params.set('token', token)
     params.set('api_sig', md5(`api_key${process.env.LASTFM_API_KEY}methodauth.getSessiontoken${token}${process.env.LASTFM_API_SECRET}`))
 
-    fetch(lastfm.url('auth.getSession', params))
+    fetch(lastfm.url('auth.getSession', params, false))
     .then(resp => resp.text())
     .then(text => xml.parse(text))
     .then(result => {
