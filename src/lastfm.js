@@ -1,8 +1,5 @@
-import md5 from 'blueimp-md5'
-import xml2js from 'xml2js'
-
 export default {
-  apiUrl (method, params) {
+  url (method, params) {
     let queryString = ''
     for (let [key, value] of params) {
       queryString += `&${key}=${value}`

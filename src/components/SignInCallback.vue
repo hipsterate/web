@@ -11,11 +11,13 @@ import xml from '../utils/xml'
 export default {
   created () {
     const params = new Map()
-    params.set('token', this.$route.query.token)
+    const token = this.$route.query.token
+    params.set('token', token)
     params.set('api_sig', md5(`api_key${process.env.LASTFM_API_KEY}methodauth.getSessiontoken${token}${process.env.LASTFM_API_SECRET}`))
 
     fetch(lastfm.url('auth.getSession', params))
-    .then(resp => xml.parse(resp.text()))
+    .then(resp => resp.text())
+    .then(text => xml.parse(text))
     .then(result => {
       const session = {
         isAuth: true,
