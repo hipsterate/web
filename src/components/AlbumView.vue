@@ -28,7 +28,6 @@ export default {
     fetch(lastfm.url('user.getTopAlbums', params))
     .then(resp => resp.json())
     .then(result => {
-      console.log(result.topalbums.album.length)
       this.albums = result.topalbums.album.map(album => {
         return {
           id: album.mbid,
@@ -41,7 +40,6 @@ export default {
           artistLastfmLink: album.artist.url
         }
       })
-      console.log(this.albums.length)
     })
   }
 }
@@ -51,17 +49,14 @@ export default {
 .album-grid {
   width: 100%;
   display: flex;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  flex-flow: row wrap;
-  -ms-flex-flow: row wrap;
-  -webkit-flex-flow: row wrap;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: strech;
+  align-content: strech;
 }
 
 .album-grid>.album {
-  width: 20%;
-  flex: auto;
-  -ms-flex: auto;
-  -webkit-box-flex: 1;
+  flex-basis: 200px;
+  flex-grow: 1;
 }
 </style>
