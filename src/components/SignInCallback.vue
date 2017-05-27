@@ -1,9 +1,10 @@
 <template>
+  <h1>Now Sign-in...</h1>
 </template>
 
 <script>
+import { Cookies } from 'quasar'
 import md5 from 'blueimp-md5'
-
 import store from '../store'
 import lastfm from '../lastfm'
 import xml from '../utils/xml'
@@ -19,12 +20,10 @@ export default {
     .then(resp => resp.text())
     .then(text => xml.parse(text))
     .then(result => {
-      const session = {
-        isAuth: true,
-        user: result.lfm.session[0].name[0],
-        key: result.lfm.session[0].key[0]
-      }
-      store.setSession(session)
+      Cookies.set('isAuth', true)
+      Cookies.set('username', result.lfm.session[0].name[0])
+      Cookies.set('sessionkey', result.lfm.session[0].key[0])
+      store.setUsername(result.lfm.session[0].name[0])
     })
     .catch(err => console.log(err))
 

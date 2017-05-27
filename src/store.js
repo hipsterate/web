@@ -1,14 +1,8 @@
 export default {
   state: {
-    session: {
-      isAuth: false,
-      user: '',
-      session: ''
-    }
+    username: ''
   },
-  setSession (session) {
-    this.state.session.isAuth = session.isAuth
-    this.state.session.user = session.user
-    this.state.session.key = session.key
+  setUsername: function (username) {
+    this.state.username = username
   }
 }

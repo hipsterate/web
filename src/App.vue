@@ -7,12 +7,12 @@
           Hipsterate
         </q-toolbar-title>
 
-        <button v-if="!session.isAuth" @click="signIn">
+        <button v-if="!username" @click="signIn">
           <i>supervisor_account</i>
           Sign in with last.fm
         </button>
         <button v-else>
-          {{ session.user }}
+          {{ username }}
         </button>
       </div>
 
@@ -23,12 +23,18 @@
 </template>
 
 <script>
+import { Cookies } from 'quasar'
 import store from './store'
 
 export default {
   data () {
     return {
-      session: store.state.session
+      store: store
+    }
+  },
+  computed: {
+    username: function () {
+      return this.store.state.username || Cookies.get('username')
     }
   },
   methods: {

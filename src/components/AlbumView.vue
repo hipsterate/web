@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import store from '../store'
+import { Cookies } from 'quasar'
 import lastfm from '../lastfm'
 
 export default {
@@ -15,7 +15,7 @@ export default {
   },
   created () {
     const params = new Map()
-    params.set('user', store.state.session.user)
+    params.set('user', Cookies.get('username'))
     params.set('limit', 10)
 
     fetch(lastfm.url('user.getRecentTracks', params))
