@@ -6,12 +6,12 @@
         Hipsterate
       </q-toolbar-title>
 
-      <button v-if="!store.state.isAuth" @click="signIn">
+      <button v-if="!session.isAuth" @click="signIn">
         <i>supervisor_account</i>
         Sign in with last.fm
       </button>
       <button v-else>
-        {{ store.state.user }}
+        {{ session.user }}
       </button>
     </div>
 
@@ -27,7 +27,7 @@ import store from '../store'
 export default {
   data () {
     return {
-      store: store
+      session: store.state.session
     }
   },
   methods: {

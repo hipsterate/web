@@ -17,11 +17,12 @@ export default {
     fetch(lastfm.url('auth.getSession', params))
     .then(resp => xml.parse(resp.text()))
     .then(result => {
-        const session = result.lfm.session[0]
-        store.setIsAuth(true)
-        store.setUser(session.name[0])
-        store.setSession(session.key[0])
-      })
+      const session = {
+        isAuth: true,
+        user: result.lfm.session[0].name[0],
+        key: result.lfm.session[0].key[0]
+      }
+      store.setSession(session)
     })
     .catch(err => console.log(err))
 
