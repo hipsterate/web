@@ -5,7 +5,7 @@
       <img class="image" :src="album.image">
 
       <div class="info" v-if="info">
-        <h4 class="artist-title">{{ album.artistName }} - {{ album.name }}</h4>
+        <h4 class="artist-title"><a :href="album.lastfmLink">{{ album.artistName }} - {{ album.name }}</a></h4>
 
         <div class="play-count">
           <div class="count">{{ album.playCount }}</div>
@@ -63,6 +63,10 @@ export default {
   color: #fff;
   font-size: 13px;
   font-weight: 300;
+}
+
+.album-container .info .artist-title a {
+  color: #fff;
 }
 
 .album-container .info .play-count .count {
