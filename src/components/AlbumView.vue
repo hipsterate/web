@@ -8,7 +8,7 @@
 
 <script>
 import { Cookies } from 'quasar'
-import lastfm from '../lastfm'
+import lastfm from '../utils/lastfm'
 import Album from './Album'
 
 export default {

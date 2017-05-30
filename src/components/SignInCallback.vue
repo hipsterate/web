@@ -6,7 +6,7 @@
 import { Cookies } from 'quasar'
 import md5 from 'blueimp-md5'
 import store from '../store'
-import lastfm from '../lastfm'
+import lastfm from '../utils/lastfm'
 import xml from '../utils/xml'
 
 export default {

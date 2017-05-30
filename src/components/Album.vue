@@ -2,6 +2,8 @@
   <div>
     <div class="album-container" @mouseenter="info = true" @mouseleave="info = false">
 
+      <img class="image" :src="album.image">
+
       <div class="info" v-if="info">
         <h4 class="artist-title">{{ album.artistName }} - {{ album.name }}</h4>
 
@@ -12,10 +14,7 @@
 
         <div class="rating">
         </div>
-
       </div>
-
-      <img class="image" :src="album.image">
 
     </div>
   </div>
@@ -34,6 +33,12 @@ export default {
 
 <style scoped>
 .album-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.album-container .image {
   position: relative;
   width: 100%;
   height: 100%;
@@ -72,11 +77,5 @@ export default {
   font-size: 13px;
   font-weight: 300;
   text-align: center;
-}
-
-.album-container .image {
-  position: relative;
-  width: 100%;
-  height: 100%;
 }
 </style>
