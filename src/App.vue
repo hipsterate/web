@@ -13,6 +13,12 @@
         </button>
         <button v-else>
           {{ user.email }}
+
+          <q-popover ref="popover">
+            <div>
+              <div @click="signOut(), $refs.popover.close()">Sign Out</div>
+            </div>
+          </q-popover>
         </button>
       </div>
 
@@ -44,15 +50,18 @@ export default {
 
       firebase.auth().signInWithPopup(provider)
       .then(result => {
-        const token = result.credential.accessToken
-        const user = result.user
-
-        console.log(token)
-        console.log(user)
+        this.$router.push({name: 'me'})
       })
       .catch(error => console.log(error))
 
       // window.open(`${process.env.LASTFM_AUTH_PAGE}/auth/?api_key=${process.env.LASTFM_API_KEY}&cb=${process.env.SIGNIN_REDIRECT}`)
+    },
+    signOut: function () {
+      firebase.auth().signOut()
+      .then(result => {
+        this.$router.push({name: 'home'})
+      })
+      .catch(error => console.log(error))
     }
   },
   created () {
