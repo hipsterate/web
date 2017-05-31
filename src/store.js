@@ -1,8 +1,8 @@
 export default {
   state: {
-    username: ''
+    user: null
   },
-  setUsername: function (username) {
-    this.state.username = username
+  setUser: function (user) {
+    this.state.user = user
   }
 }
