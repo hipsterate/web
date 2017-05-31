@@ -29,9 +29,8 @@
 </template>
 
 <script>
-// import { Cookies } from 'quasar'
-import firebase from './utils/firebase'
 import store from './store'
+import firebase from './utils/firebase'
 
 export default {
   data () {
@@ -64,7 +63,7 @@ export default {
       .catch(error => console.log(error))
     }
   },
-  created () {
+  beforeCreate () {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         store.setUser(user)
