@@ -5,7 +5,6 @@
 <script>
 import { Cookies } from 'quasar'
 import md5 from 'blueimp-md5'
-import store from '../store'
 import lastfm from '../utils/lastfm'
 import xml from '../utils/xml'
 
@@ -20,16 +19,12 @@ export default {
     .then(resp => resp.text())
     .then(text => xml.parse(text))
     .then(result => {
-      Cookies.set('isAuth', true)
-      Cookies.set('username', result.lfm.session[0].name[0])
-      Cookies.set('sessionkey', result.lfm.session[0].key[0])
-      store.setUsername(result.lfm.session[0].name[0])
+      Cookies.set('lastfm-username', result.lfm.session[0].name[0])
+      Cookies.set('lastfm-sessionkey', result.lfm.session[0].key[0])
     })
     .catch(err => console.log(err))
 
-    this.$router.push({
-      name: 'albums'
-    })
+    this.$router.push({ name: 'albums' })
   }
 }
 </script>

@@ -50,8 +50,6 @@ export default {
       firebase.auth().signInWithPopup(provider)
       .then(result => this.$router.push({ name: 'me' }))
       .catch(error => console.log(error))
-
-      // window.open(`${process.env.LASTFM_AUTH_PAGE}/auth/?api_key=${process.env.LASTFM_API_KEY}&cb=${process.env.SIGNIN_REDIRECT}`)
     },
     signOut: function () {
       firebase.auth().signOut()

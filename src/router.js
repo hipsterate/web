@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import store from '.store'
+import store from './store'
 import firebase from './utils/firebase'
 
 Vue.use(VueRouter)
@@ -14,8 +14,8 @@ const router = new VueRouter({
   routes: [
     { path: '/', component: load('Home'), name: 'home' },
     { path: '/me', component: load('Me'), name: 'me', meta: { authRequired: true } },
-    { path: '/signincallback', component: load('SignInCallback'), name: 'signin-callback' },
-    { path: '/albums', component: load('AlbumView'), name: 'albums' },
+    { path: '/lastfmsignincb', component: load('LastfmSignInCb'), name: 'lastfm-signin-cb', meta: { authRequired: true } },
+    { path: '/albums', component: load('AlbumView'), name: 'albums', meta: { authRequired: true } },
     { path: '*', component: load('Error404') }
   ]
 })

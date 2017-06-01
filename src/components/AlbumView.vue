@@ -22,7 +22,7 @@ export default {
   },
   created () {
     const params = new Map()
-    params.set('user', Cookies.get('username'))
+    params.set('user', Cookies.get('lastfm-username'))
     params.set('period', '1month')
 
     fetch(lastfm.url('user.getTopAlbums', params))
