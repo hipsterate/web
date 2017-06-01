@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '.store'
 import firebase from './utils/firebase'
 
 Vue.use(VueRouter)
@@ -12,7 +13,7 @@ const router = new VueRouter({
   mode: 'history',
   routes: [
     { path: '/', component: load('Home'), name: 'home' },
-    { path: '/me', component: load('Me'), name: 'me', meta: {authRequired: true} },
+    { path: '/me', component: load('Me'), name: 'me', meta: { authRequired: true } },
     { path: '/signincallback', component: load('SignInCallback'), name: 'signin-callback' },
     { path: '/albums', component: load('AlbumView'), name: 'albums' },
     { path: '*', component: load('Error404') }
@@ -23,11 +24,12 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.authRequired)) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
+        store.setUser(user)
         next()
       }
       else {
         alert('Please signin first!')
-        next({name: 'home'})
+        next({ name: 'home' })
       }
     })
 
