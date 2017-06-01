@@ -5,6 +5,8 @@
 <script>
 import { Cookies } from 'quasar'
 import md5 from 'blueimp-md5'
+import store from '../store'
+import firebase from '../utils/firebase'
 import lastfm from '../utils/lastfm'
 import xml from '../utils/xml'
 
@@ -19,8 +21,18 @@ export default {
     .then(resp => resp.text())
     .then(text => xml.parse(text))
     .then(result => {
-      Cookies.set('lastfm-username', result.lfm.session[0].name[0])
-      Cookies.set('lastfm-sessionkey', result.lfm.session[0].key[0])
+      const uId = store.state.user.uid
+      const lastfmUsername = result.lfm.session[0].name[0]
+      const lastfmSessionKey = result.lfm.session[0].key[0]
+
+      let updates = {}
+      updates[`/user-lastfm/${uId}`] = { lastfmUsername: lastfmUsername }
+
+      firebase.database().ref().update(updates)
+      .catch(error => console.log(error))
+
+      Cookies.set('lastfm-username', lastfmUsername)
+      Cookies.set('lastfm-sessionkey', lastfmSessionKey)
     })
     .catch(err => console.log(err))
 
