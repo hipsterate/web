@@ -3,9 +3,11 @@
     <q-layout>
 
       <div slot="header" class="toolbar dark">
-        <q-toolbar-title :padding="0">
-          Hipsterate
-        </q-toolbar-title>
+        <router-link class="go-home" :to="{ name: 'home' }">
+          <q-toolbar-title :padding="0">
+            Hipsterate
+          </q-toolbar-title>
+        </router-link>
 
         <button v-if="!user" @click="signIn">
           <i>supervisor_account</i>
@@ -69,3 +71,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.go-home {
+  color: #fff;
+}
+</style>
