@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import { Cookies } from 'quasar'
 import md5 from 'blueimp-md5'
 import store from '../store'
 import firebase from '../utils/firebase'
@@ -26,13 +25,13 @@ export default {
       const lastfmSessionKey = result.lfm.session[0].key[0]
 
       let updates = {}
-      updates[`/user-lastfm/${uId}`] = { lastfmUsername: lastfmUsername }
+      updates[`/user-lastfm/${uId}`] = {
+        lastfmUsername: lastfmUsername,
+        lastfmSessionKey: lastfmSessionKey
+      }
 
       firebase.database().ref().update(updates)
       .catch(error => console.log(error))
-
-      Cookies.set('lastfm-username', lastfmUsername)
-      Cookies.set('lastfm-sessionkey', lastfmSessionKey)
     })
     .catch(err => console.log(err))
 
