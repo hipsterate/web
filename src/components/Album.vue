@@ -21,11 +21,19 @@
 </template>
 
 <script>
+// import firebase from '../utils/firebase'
+
 export default {
   props: ['album'],
   data () {
     return {
-      info: false
+      info: false,
+      rating: null
+    }
+  },
+  methods: {
+    rate () {
+      // firbase.database().ref()
     }
   }
 }
