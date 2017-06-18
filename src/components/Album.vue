@@ -60,6 +60,16 @@ export default {
         .catch(error => console.log(error))
       }
     }
+  },
+  created () {
+    firebase.database().ref(`/user-albums/${store.state.user.uid}/${this.album.id}`)
+    .once('value')
+    .then(snapshot => {
+      const result = snapshot.val()
+      if (result) {
+        this.rating = result.rating
+      }
+    })
   }
 }
 </script>
