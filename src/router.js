@@ -23,6 +23,13 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.authRequired)) {
     firebase.auth().onAuthStateChanged(user => {
+      firebase.database().ref(`/user-lastfm/${user.uid}`)
+      .once('value')
+      .then(snapshot => {
+        const result = snapshot.val()
+        store.setLastfmUsername(result.lastfmUsername)
+      })
+
       if (user) {
         store.setUser(user)
         next()

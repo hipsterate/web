@@ -46,7 +46,6 @@ export default {
     }
   },
   created () {
-    console.log(store.state.user)
     firebase.database().ref(`/user-lastfm/${store.state.user.uid}`)
     .once('value')
     .then(snapshot => {
