@@ -8,26 +8,21 @@
 
 <script>
 import store from '../store'
-import firebase from '../utils/firebase'
 
 export default {
   data () {
     return {
-      lastfmUsername: null
+    }
+  },
+  computed: {
+    lastfmUsername () {
+      return store.state.lastfmUsername
     }
   },
   methods: {
     lastfmSignIn: function () {
       window.open(`${process.env.LASTFM_AUTH_PAGE}/auth/?api_key=${process.env.LASTFM_API_KEY}&cb=${process.env.LASTFM_SIGNIN_CB}`)
     }
-  },
-  created () {
-    firebase.database().ref(`/user-lastfm/${store.state.user.uid}`)
-    .once('value')
-    .then(snapshot => {
-      const result = snapshot.val()
-      this.lastfmUsername = result.lastfmUsername
-    })
   }
 }
 </script>

@@ -27,7 +27,9 @@ router.beforeEach((to, from, next) => {
       .once('value')
       .then(snapshot => {
         const result = snapshot.val()
-        store.setLastfmUsername(result.lastfmUsername)
+        if (result) {
+          store.setLastfmUsername(result.lastfmUsername)
+        }
       })
 
       if (user) {
