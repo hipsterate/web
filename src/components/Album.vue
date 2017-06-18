@@ -11,7 +11,7 @@
           <span class="count">{{ album.playCount }}</span><span class="times">time<span v-if="album.playCount > 1">s</span></span>
         </div>
 
-        <q-rating class="rating" v-model="rating" :max="10"></q-rating>
+        <q-rating class="rating" v-model="rating" :max="10" @input="rate"></q-rating>
       </div>
 
     </div>
@@ -19,19 +19,46 @@
 </template>
 
 <script>
-// import firebase from '../utils/firebase'
+import store from '../store'
+import firebase from '../utils/firebase'
 
 export default {
   props: ['album'],
   data () {
     return {
       info: false,
-      rating: null
+      rating: 0
     }
   },
   methods: {
     rate () {
-      // firbase.database().ref()
+      firebase.database().ref('/albums').child(this.album.id)
+      .transaction(album => {
+        if (album === null) {
+          const newAlbum = Object.assign({}, this.album)
+          delete newAlbum.playCount
+          return newAlbum
+        }
+      }, (error, commited, snapshot) => {
+        this.updateRecords(error, commited, snapshot)
+      })
+    },
+    updateRecords (error, commited, snapshot) {
+      if (!error) {
+        let updates = {}
+        updates[`/user-albums/${store.state.user.uid}/${this.album.id}`] = {
+          rating: this.rating,
+          updatedAt: firebase.database.ServerValue.TIMESTAMP
+        }
+        updates[`/album-users/${this.album.id}/${store.state.user.uid}`] = {
+          rating: this.rating,
+          lastfmUsername: store.state.lastfmUsername,
+          updatedAt: firebase.database.ServerValue.TIMESTAMP
+        }
+
+        firebase.database().ref().update(updates)
+        .catch(error => console.log(error))
+      }
     }
   }
 }
