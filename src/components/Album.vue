@@ -8,12 +8,10 @@
         <h4 class="artist-title"><a :href="album.lastfmLink" target="_blank">{{ album.artistName }} - {{ album.name }}</a></h4>
 
         <div class="play-count">
-          <div class="count">{{ album.playCount }}</div>
-          <div class="times">time<span v-if="album.playCount > 1">s</span></div>
+          <span class="count">{{ album.playCount }}</span><span class="times">time<span v-if="album.playCount > 1">s</span></span>
         </div>
 
-        <div class="rating">
-        </div>
+        <q-rating class="rating" v-model="rating" :max="10"></q-rating>
       </div>
 
     </div>
@@ -60,34 +58,50 @@ export default {
 
   width: 100%;
   height: 100%;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 0.9em;
 
   background: #000;
   opacity: 0.7;
 }
 
 .album-container>.info>.artist-title {
+  height: 10%;
+  margin: 0;
+
   color: #fff;
-  font-size: 13px;
-  font-weight: 300;
+  font-size: 0.9em;
+  font-weight: 400;
 }
 
 .album-container>.info>.artist-title>a {
   color: #fff;
 }
 
-.album-container>.info>.play-count>.count {
-  color: #fff;
-  font-size: 50px;
-  font-weight: 600;
+.album-container>.info>.play-count {
+  height: 50%;
+  margin: 20% 0 0 0;
   text-align: center;
 }
 
-.album-container>.info>.play-count>.times {
+.album-container>.info>.play-count>.count {
   color: #fff;
-  font-size: 13px;
+  font-size: 2em;
+  font-weight: 600;
+}
+
+.album-container>.info>.play-count>.times {
+  padding-left: 0.3em;
+
+  color: #fff;
+  font-size: 1em;
   font-weight: 300;
+}
+
+.album-container>.info>.rating {
+  margin: 10% 0 0 0;
+  height: 10%;
+
+  font-size: 0.8em;
   text-align: center;
 }
 </style>
