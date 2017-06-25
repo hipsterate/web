@@ -30,7 +30,6 @@ export default {
           result[k].id = k
           return result[k]
         })
-        console.log(result)
         this.rateds = result.sort((a, b) => b.updatedAt - a.updatedAt)
       }
     })

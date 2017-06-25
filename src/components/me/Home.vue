@@ -1,19 +1,24 @@
 <template>
-  <div class="me-container">
-    <div v-if="!lastfmUsername">
-      <button class="dark" @click="lastfmSignIn">Please signin with Last.fm!</button>
+  <div>
+    <div class="me-container">
+      <div v-if="!lastfmUsername">
+        <button class="dark" @click="lastfmSignIn">Please signin with Last.fm!</button>
+      </div>
+      <div v-else>
+        <h4>Hello, {{ lastfmUsername }}!</h4>
+      </div>
+
+      <div>
+        <router-link :to="{ name: 'me-recentlyPlayed' }">
+          <button class="dark">Recently Played</button>
+        </router-link>
+        <router-link :to="{ name: 'me-rated' }">
+          <button class="dark">Rated</button>
+        </router-link>
+      </div>
     </div>
-    <div v-else>
-      <h4>Hello, {{ lastfmUsername }}!</h4>
-    </div>
-    <div>
-      <router-link :to="{ name: 'me-recentlyPlayed' }">
-        <button class="dark">Recently Played</button>
-      </router-link>
-      <router-link :to="{ name: 'me-rated' }">
-        <button class="dark">Rated</button>
-      </router-link>
-    </div>
+
+    <router-view class="layout-view"></router-view>
   </div>
 </template>
 

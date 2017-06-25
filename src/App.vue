@@ -18,7 +18,7 @@
 
           <q-popover ref="popover">
             <div>
-              <div @click="goMeHome(), $refs.popover.close()">My Page</div>
+              <div @click="goMe(), $refs.popover.close()">My Page</div>
               <div @click="signOut(), $refs.popover.close()">Sign Out</div>
             </div>
           </q-popover>
@@ -59,8 +59,8 @@ export default {
       .then(result => this.$router.push({ name: 'home' }))
       .catch(error => console.log(error))
     },
-    goMeHome () {
-      this.$router.push({ name: 'me-home' })
+    goMe () {
+      this.$router.push({ name: 'me' })
     }
   },
   beforeCreate () {

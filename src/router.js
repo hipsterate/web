@@ -16,10 +16,9 @@ const router = new VueRouter({
     {
       path: '/me',
       name: 'me',
-      component: load('me/Me'),
+      component: load('me/Home'),
       meta: { authRequired: true },
       children: [
-        { path: 'home', name: 'me-home', component: load('me/Home') },
         { path: 'recentlyplayed', name: 'me-recentlyPlayed', component: load('me/RecentlyPlayed') },
         { path: 'rated', name: 'me-rated', component: load('me/Rated') }
       ]
