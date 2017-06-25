@@ -18,6 +18,7 @@
 
           <q-popover ref="popover">
             <div>
+              <div @click="goMeHome(), $refs.popover.close()">My Page</div>
               <div @click="signOut(), $refs.popover.close()">Sign Out</div>
             </div>
           </q-popover>
@@ -46,17 +47,20 @@ export default {
     }
   },
   methods: {
-    signIn: function () {
+    signIn () {
       const provider = new firebase.auth.GoogleAuthProvider()
 
       firebase.auth().signInWithPopup(provider)
       .then(result => this.$router.push({ name: 'me' }))
       .catch(error => console.log(error))
     },
-    signOut: function () {
+    signOut () {
       firebase.auth().signOut()
       .then(result => this.$router.push({ name: 'home' }))
       .catch(error => console.log(error))
+    },
+    goMeHome () {
+      this.$router.push({ name: 'me-home' })
     }
   },
   beforeCreate () {

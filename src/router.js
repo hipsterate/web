@@ -19,8 +19,8 @@ const router = new VueRouter({
       component: load('me/Me'),
       meta: { authRequired: true },
       children: [
-        { path: 'home', name: 'home', component: load('me/Home') },
-        { path: 'recentlyplayed', name: 'recentlyPlayed', component: load('me/RecentlyPlayed') }
+        { path: 'home', name: 'me-home', component: load('me/Home') },
+        { path: 'recentlyplayed', name: 'me-recentlyPlayed', component: load('me/RecentlyPlayed') }
       ]
     },
     { path: '/lastfmsignincb', component: load('LastfmSignInCb'), name: 'lastfm-signin-cb', meta: { authRequired: true } },
