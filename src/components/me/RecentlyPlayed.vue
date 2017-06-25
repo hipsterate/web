@@ -7,10 +7,10 @@
 </template>
 
 <script>
-import store from '../store'
-import firebase from '../utils/firebase'
-import lastfm from '../utils/lastfm'
-import Album from './Album'
+import store from 'store'
+import firebase from 'utils/firebase'
+import lastfm from 'utils/lastfm'
+import Album from 'components/Album'
 
 export default {
   components: {

@@ -12,10 +12,18 @@ function load (component) {
 const router = new VueRouter({
   mode: 'history',
   routes: [
-    { path: '/', component: load('Home'), name: 'home' },
-    { path: '/me', component: load('Me'), name: 'me', meta: { authRequired: true } },
+    { path: '/', name: 'home', component: load('Home') },
+    {
+      path: '/me',
+      name: 'me',
+      component: load('me/Me'),
+      meta: { authRequired: true },
+      children: [
+        { path: 'home', name: 'home', component: load('me/Home') },
+        { path: 'recentlyplayed', name: 'recentlyPlayed', component: load('me/RecentlyPlayed') }
+      ]
+    },
     { path: '/lastfmsignincb', component: load('LastfmSignInCb'), name: 'lastfm-signin-cb', meta: { authRequired: true } },
-    { path: '/albums', component: load('AlbumView'), name: 'albums', meta: { authRequired: true } },
     { path: '*', component: load('Error404') }
   ]
 })
