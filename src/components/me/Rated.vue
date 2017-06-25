@@ -24,9 +24,14 @@ export default {
     firebase.database().ref(`/user-albums/${store.state.user.uid}`)
     .once('value')
     .then(snapshot => {
-      const result = snapshot.val()
+      let result = snapshot.val()
       if (result) {
-        this.rateds = result
+        result = Object.keys(result).map(k => {
+          result[k].id = k
+          return result[k]
+        })
+        console.log(result)
+        this.rateds = result.sort((a, b) => b.updatedAt - a.updatedAt)
       }
     })
   }
