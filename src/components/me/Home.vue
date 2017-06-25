@@ -7,11 +7,13 @@
       <h4>Hello, {{ lastfmUsername }}!</h4>
     </div>
     <div>
-      <router-link class="go-recently-played" :to="{ name: 'recentlyPlayed' }">
+      <router-link :to="{ name: 'me-recentlyPlayed' }">
         <button class="dark">Recently Played</button>
       </router-link>
+      <router-link :to="{ name: 'me-rated' }">
+        <button class="dark">Rated</button>
+      </router-link>
     </div>
-    <router-view></router-view>
   </div>
 </template>
 
