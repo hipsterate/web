@@ -7,7 +7,7 @@
       <div class="info" v-if="info">
         <h4 class="artist-title"><a :href="album.lastfmLink" target="_blank">{{ album.artistName }} - {{ album.name }}</a></h4>
 
-        <div class="play-count">
+        <div class="play-count" :class="{ 'display-hidden': !isPlayCount }">
           <span class="count">{{ album.playCount }}</span><span class="times">time<span v-if="album.playCount > 1">s</span></span>
         </div>
 
@@ -19,11 +19,11 @@
 </template>
 
 <script>
-import store from '../store'
-import firebase from '../utils/firebase'
+import store from 'store'
+import firebase from 'utils/firebase'
 
 export default {
-  props: ['album'],
+  props: ['album', 'isPlayCount'],
   data () {
     return {
       info: false,
@@ -44,17 +44,16 @@ export default {
       })
     },
     updateRecords (error, commited, snapshot) {
+      const newAlbum = Object.assign({}, this.album)
+      newAlbum.rating = this.rating
+      newAlbum.lastfmUsername = store.state.lastfmUsername
+      newAlbum.updatedAt = firebase.database.ServerValue.TIMESTAMP
+      delete newAlbum.playCount
+
       if (!error) {
         let updates = {}
-        updates[`/user-albums/${store.state.user.uid}/${this.album.id}`] = {
-          rating: this.rating,
-          updatedAt: firebase.database.ServerValue.TIMESTAMP
-        }
-        updates[`/album-users/${this.album.id}/${store.state.user.uid}`] = {
-          rating: this.rating,
-          lastfmUsername: store.state.lastfmUsername,
-          updatedAt: firebase.database.ServerValue.TIMESTAMP
-        }
+        updates[`/user-albums/${store.state.user.uid}/${this.album.id}`] = newAlbum
+        updates[`/album-users/${this.album.id}/${store.state.user.uid}`] = newAlbum
 
         firebase.database().ref().update(updates)
         .catch(error => console.log(error))
@@ -140,5 +139,9 @@ export default {
 
   font-size: 0.8em;
   text-align: center;
+}
+
+.display-hidden {
+  visibility: hidden;
 }
 </style>
