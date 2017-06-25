@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="album-grid">
-      <album class="album" v-for="album of albums" :key="album.mbid" :album="album"></album>
+      <album class="album" v-for="album of albums" :key="album.mbid" :album="album" :isPlayCount="false"></album>
     </div>
   </div>
 </template>
