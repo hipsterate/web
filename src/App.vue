@@ -32,8 +32,8 @@
 </template>
 
 <script>
-import store from './store'
-import firebase from './utils/firebase'
+import { firebase } from 'utils/api'
+import store from 'store'
 
 export default {
   data () {
@@ -48,14 +48,12 @@ export default {
   },
   methods: {
     signIn () {
-      const provider = new firebase.auth.GoogleAuthProvider()
-
-      firebase.auth().signInWithPopup(provider)
+      firebase.signIn()
       .then(result => this.$router.push({ name: 'me' }))
       .catch(error => console.log(error))
     },
     signOut () {
-      firebase.auth().signOut()
+      firebase.signOut()
       .then(result => this.$router.push({ name: 'home' }))
       .catch(error => console.log(error))
     },
@@ -64,14 +62,8 @@ export default {
     }
   },
   beforeCreate () {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        store.setUser(user)
-      }
-      else {
-        store.setUser(null)
-      }
-    })
+    firebase.onAuthChanged()
+    .then(user => store.setUser(user))
   }
 }
 </script>
