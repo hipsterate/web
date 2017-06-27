@@ -35,17 +35,16 @@ router.beforeEach((to, from, next) => {
       if (user) {
         store.setUser(user)
 
-        firebase.getFromDB(`/user-lastfm/${user.uid}`)
+        firebase.getDB(`/user-lastfm/${user.uid}`)
         .then(result => {
           const value = result.val()
 
           if (value) {
             store.setLastfmUsername(value.lastfmUsername)
-            next()
           }
         })
 
-        next(false)
+        next()
       }
       else {
         alert('Please signin first!')

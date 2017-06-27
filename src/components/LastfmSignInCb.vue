@@ -3,39 +3,31 @@
 </template>
 
 <script>
-import md5 from 'blueimp-md5'
-import store from '../store'
-import firebase from '../utils/firebase'
-import lastfm from '../utils/lastfm'
-import xml from '../utils/xml'
+import store from 'store'
+import { firebase, lastfm } from 'utils/api'
+import xml from 'utils/xml'
 
 export default {
   created () {
-    const params = new Map()
-    const token = this.$route.query.token
-    params.set('token', token)
-    params.set('api_sig', md5(`api_key${process.env.LASTFM_API_KEY}methodauth.getSessiontoken${token}${process.env.LASTFM_API_SECRET}`))
-
-    fetch(lastfm.url('auth.getSession', params, false))
-    .then(resp => resp.text())
-    .then(text => xml.parse(text))
+    lastfm.getSession(this.$route.query.token)
+    .then(result => result.text())
+    .then(result => xml.parse(result))
     .then(result => {
-      const uId = store.state.user.uid
+      const uid = store.state.user.uid
       const lastfmUsername = result.lfm.session[0].name[0]
       const lastfmSessionKey = result.lfm.session[0].key[0]
 
       let updates = {}
-      updates[`/user-lastfm/${uId}`] = {
+      updates[`/user-lastfm/${uid}`] = {
         lastfmUsername: lastfmUsername,
         lastfmSessionKey: lastfmSessionKey
       }
-
-      firebase.database().ref().update(updates)
+      firebase.updateDB(updates)
       .catch(error => console.log(error))
     })
-    .catch(err => console.log(err))
+    .catch(error => console.log(error))
 
-    this.$router.push({ name: 'albums' })
+    this.$router.push({ name: 'me' })
   }
 }
 </script>
