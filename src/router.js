@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { firebase } from 'utils/api'
 import store from './store'
-import firebaseApp from './utils/firebase'
 
 Vue.use(VueRouter)
 
@@ -36,12 +35,12 @@ router.beforeEach((to, from, next) => {
       if (user) {
         store.setUser(user)
 
-        firebaseApp.database().ref(`/user-lastfm/${user.uid}`)
-        .once('value')
-        .then(snapshot => {
-          const result = snapshot.val()
-          if (result) {
-            store.setLastfmUsername(result.lastfmUsername)
+        firebase.getFromDB(`/user-lastfm/${user.uid}`)
+        .then(result => {
+          const value = result.val()
+
+          if (value) {
+            store.setLastfmUsername(value.lastfmUsername)
             next()
           }
         })

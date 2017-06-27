@@ -5,6 +5,7 @@ const loadingManager = {
   count: 0,
   start () {
     this.count += 1
+    console.log('api start', this.count)
 
     if (!Loading.isActive()) {
       Loading.show({
@@ -15,6 +16,7 @@ const loadingManager = {
   },
   end () {
     this.count -= 1
+    console.log('api end', this.count)
 
     if (this.count === 0) {
       Loading.hide()
