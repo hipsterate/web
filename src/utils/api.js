@@ -1,5 +1,7 @@
 import { Loading } from 'quasar'
+import md5 from 'blueimp-md5'
 import firebaseApp from 'utils/firebase'
+import lastfmApp from 'utils/lastfm'
 
 const loadingManager = {
   count: 0,
@@ -46,10 +48,31 @@ const firebaseApi = {
       firebaseApp.auth().onAuthStateChanged(user => resolve(user))
     })
   },
-  getFromDB (url) {
+  getDB (url) {
     return new Promise((resolve, reject) => {
       firebaseApp.database().ref(url)
       .once('value')
+      .then(result => resolve(result))
+      .catch(error => reject(error))
+    })
+  },
+  updateDB (updates) {
+    return new Promise((resolve, reject) => {
+      firebaseApp.database().ref().update(updates)
+      .then(result => resolve(result))
+      .catch(error => reject(error))
+    })
+  }
+}
+
+const lastfmApi = {
+  getSession (token) {
+    const params = new Map()
+    params.set('token', token)
+    params.set('api_sig', md5(`api_key${process.env.LASTFM_API_KEY}methodauth.getSessiontoken${token}${process.env.LASTFM_API_SECRET}`))
+    const url = lastfmApp.url('auth.getSession', params, false)
+    return new Promise((resolve, reject) => {
+      fetch(url)
       .then(result => resolve(result))
       .catch(error => reject(error))
     })
@@ -79,3 +102,4 @@ const handler = {
 }
 
 export const firebase = new Proxy(firebaseApi, handler)
+export const lastfm = new Proxy(lastfmApi, handler)
