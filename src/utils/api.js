@@ -76,6 +76,18 @@ const lastfmApi = {
       .then(result => resolve(result))
       .catch(error => reject(error))
     })
+  },
+  getTopAlbums (lastfmUsername) {
+    const params = new Map()
+    params.set('user', lastfmUsername)
+    params.set('period', '1month')
+    const url = lastfmApp.url('user.getTopAlbums', params)
+
+    return new Promise((resolve, reject) => {
+      fetch(url)
+      .then(result => resolve(result))
+      .catch(error => reject(error))
+    })
   }
 }
 
