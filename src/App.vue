@@ -49,21 +49,23 @@ export default {
   methods: {
     signIn () {
       firebase.signIn()
-      .then(result => this.$router.push({ name: 'me' }))
+      .then(result => {
+        store.setUser(result.user)
+        this.$router.push({ name: 'me' })
+      })
       .catch(error => console.log(error))
     },
     signOut () {
       firebase.signOut()
-      .then(result => this.$router.push({ name: 'home' }))
+      .then(result => {
+        store.setUser(null)
+        this.$router.push({ name: 'home' })
+      })
       .catch(error => console.log(error))
     },
     goMe () {
       this.$router.push({ name: 'me' })
     }
-  },
-  beforeCreate () {
-    firebase.onAuthChanged()
-    .then(user => store.setUser(user))
   }
 }
 </script>
