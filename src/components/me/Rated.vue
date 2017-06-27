@@ -8,7 +8,7 @@
 
 <script>
 import store from 'store'
-import firebase from 'utils/firebase'
+import { firebase } from 'utils/api'
 import Album from 'components/Album'
 
 export default {
@@ -21,16 +21,17 @@ export default {
     }
   },
   created () {
-    firebase.database().ref(`/user-albums/${store.state.user.uid}`)
-    .once('value')
-    .then(snapshot => {
-      let result = snapshot.val()
-      if (result) {
-        result = Object.keys(result).map(k => {
-          result[k].id = k
-          return result[k]
+    firebase.getDB(`/user-albums/${store.state.user.uid}`)
+    .then(result => {
+      const value = result.val()
+
+      if (value) {
+        const rateds = Object.keys(value).map(key => {
+          value[key].id = key
+          return value[key]
         })
-        this.rateds = result.sort((a, b) => b.updatedAt - a.updatedAt)
+
+        this.rateds = rateds.sort((a, b) => b.updatedAt - a.updatedAt)
       }
     })
   }
