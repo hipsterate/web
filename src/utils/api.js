@@ -48,6 +48,9 @@ const firebaseApi = {
       firebaseApp.auth().onAuthStateChanged(user => resolve(user))
     })
   },
+  timestamp () {
+    return new Promise((resolve, reject) => resolve(firebaseApp.database.ServerValue.TIMESTAMP))
+  },
   getDB (url) {
     return new Promise((resolve, reject) => {
       firebaseApp.database().ref(url)
@@ -61,6 +64,20 @@ const firebaseApi = {
       firebaseApp.database().ref().update(updates)
       .then(result => resolve(result))
       .catch(error => reject(error))
+    })
+  },
+  createNewAlbumAtomic (album, onComplete) {
+    const url = `/albums/${album.id}`
+
+    return new Promise((resolve, reject) => {
+      firebaseApp.database().ref(url)
+      .transaction(album => {
+        if (album === null) {
+          const newAlbum = Object.assign({}, album)
+          delete newAlbum.playCount
+          return newAlbum
+        }
+      }, onComplete)
     })
   }
 }

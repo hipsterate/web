@@ -20,7 +20,7 @@
 
 <script>
 import store from 'store'
-import firebase from 'utils/firebase'
+import { firebase } from 'utils/api'
 
 export default {
   props: ['album', 'isPlayCount'],
@@ -32,41 +32,33 @@ export default {
   },
   methods: {
     rate () {
-      firebase.database().ref('/albums').child(this.album.id)
-      .transaction(album => {
-        if (album === null) {
-          const newAlbum = Object.assign({}, this.album)
-          delete newAlbum.playCount
-          return newAlbum
+      firebase.createNewAlbumAtomic(this.album, (error, commited, snapshot) => {
+        const newAlbum = Object.assign({}, this.album)
+        newAlbum.rating = this.rating
+        newAlbum.lastfmUsername = store.state.lastfmUsername
+        newAlbum.updatedAt = firebase.timestamp()
+        delete newAlbum.playCount
+
+        console.log(newAlbum)
+
+        if (!error) {
+          let updates = {}
+          updates[`/user-albums/${store.state.user.uid}/${this.album.id}`] = newAlbum
+          updates[`/album-users/${this.album.id}/${store.state.user.uid}`] = newAlbum
+
+          firebase.updateDB(updates)
+          .catch(error => console.log(error))
         }
-      }, (error, commited, snapshot) => {
-        this.updateRecords(error, commited, snapshot)
       })
-    },
-    updateRecords (error, commited, snapshot) {
-      const newAlbum = Object.assign({}, this.album)
-      newAlbum.rating = this.rating
-      newAlbum.lastfmUsername = store.state.lastfmUsername
-      newAlbum.updatedAt = firebase.database.ServerValue.TIMESTAMP
-      delete newAlbum.playCount
-
-      if (!error) {
-        let updates = {}
-        updates[`/user-albums/${store.state.user.uid}/${this.album.id}`] = newAlbum
-        updates[`/album-users/${this.album.id}/${store.state.user.uid}`] = newAlbum
-
-        firebase.database().ref().update(updates)
-        .catch(error => console.log(error))
-      }
     }
   },
   created () {
-    firebase.database().ref(`/user-albums/${store.state.user.uid}/${this.album.id}`)
-    .once('value')
-    .then(snapshot => {
-      const result = snapshot.val()
-      if (result) {
-        this.rating = result.rating
+    firebase.getDB(`/user-albums/${store.state.user.uid}/${this.album.id}`)
+    .then(result => {
+      const value = result.val()
+
+      if (value) {
+        this.rating = value.rating
       }
     })
   }
