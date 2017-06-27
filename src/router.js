@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { firebase } from 'utils/api'
 import store from './store'
-import firebase from './utils/firebase'
+import firebaseApp from './utils/firebase'
 
 Vue.use(VueRouter)
 
@@ -30,19 +31,22 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.authRequired)) {
-    firebase.auth().onAuthStateChanged(user => {
-      firebase.database().ref(`/user-lastfm/${user.uid}`)
-      .once('value')
-      .then(snapshot => {
-        const result = snapshot.val()
-        if (result) {
-          store.setLastfmUsername(result.lastfmUsername)
-        }
-      })
-
+    firebase.onAuthChanged()
+    .then(user => {
       if (user) {
         store.setUser(user)
-        next()
+
+        firebaseApp.database().ref(`/user-lastfm/${user.uid}`)
+        .once('value')
+        .then(snapshot => {
+          const result = snapshot.val()
+          if (result) {
+            store.setLastfmUsername(result.lastfmUsername)
+            next()
+          }
+        })
+
+        next(false)
       }
       else {
         alert('Please signin first!')
