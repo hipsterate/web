@@ -13,9 +13,9 @@ const loadingManager = {
       })
     }
   },
-  end () {
+  end (key, args) {
     this.count -= 1
-    console.log('api end', this.count)
+    console.log(key, args, 'api end', this.count)
 
     if (this.count === 0) {
       Loading.hide()
@@ -35,11 +35,11 @@ export const loadingProxyHandler = {
       const proxiedApi = new Promise((resolve, reject) => {
         originProperty.apply(this, args).then(result => {
           resolve(result)
-          loadingManager.end()
+          loadingManager.end(key, args)
         })
         .catch(error => {
           reject(error)
-          loadingManager.end()
+          loadingManager.end(key, args)
         })
       })
 

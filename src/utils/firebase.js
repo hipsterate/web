@@ -62,6 +62,8 @@ const firebaseAPI = {
           return newAlbum
         }
       }, onComplete)
+
+      resolve()
     })
   }
 }
