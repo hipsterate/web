@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import md5 from 'blueimp-md5'
 import store from 'store'
 import firebase from 'utils/firebase'
 
@@ -28,6 +29,11 @@ export default {
     return {
       info: false,
       rating: 0
+    }
+  },
+  computed: {
+    key () {
+      return md5(`${this.album.artistName}${this.album.name}`)
     }
   },
   methods: {
@@ -41,8 +47,8 @@ export default {
 
         if (!error) {
           let updates = {}
-          updates[`/user-albums/${store.state.user.uid}/${this.album.id}`] = newAlbum
-          updates[`/album-users/${this.album.id}/${store.state.user.uid}`] = newAlbum
+          updates[`/user-albums/${store.state.user.uid}/${this.key}`] = newAlbum
+          updates[`/album-users/${this.key}/${store.state.user.uid}`] = newAlbum
 
           firebase.updateDB(updates)
           .catch(error => console.log(error))
@@ -51,7 +57,7 @@ export default {
     }
   },
   created () {
-    firebase.getDB(`/user-albums/${store.state.user.uid}/${this.album.id}`)
+    firebase.getDB(`/user-albums/${store.state.user.uid}/${this.key}`)
     .then(result => {
       const value = result.val()
 

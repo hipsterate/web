@@ -1,12 +1,13 @@
 <template>
   <div>
     <div class="album-grid">
-      <album class="album" v-for="album of rateds" :key="album.mbid" :album="album" :isPlayCount="false"></album>
+      <album class="album" v-for="album of rateds" :key="albumKey(album)" :album="album" :isPlayCount="false"></album>
     </div>
   </div>
 </template>
 
 <script>
+import md5 from 'blueimp-md5'
 import store from 'store'
 import firebase from 'utils/firebase'
 import Album from 'components/Album'
@@ -20,6 +21,11 @@ export default {
       rateds: []
     }
   },
+  methods: {
+    albumKey (album) {
+      return md5(`${album.artistName}${album.name}`)
+    }
+  },
   created () {
     firebase.getDB(`/user-albums/${store.state.user.uid}`)
     .then(result => {
@@ -27,7 +33,6 @@ export default {
 
       if (value) {
         const rateds = Object.keys(value).map(key => {
-          value[key].id = key
           return value[key]
         })
 

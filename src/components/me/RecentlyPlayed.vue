@@ -1,12 +1,13 @@
 <template>
   <div>
     <div class="album-grid">
-      <album class="album" v-for="album of albums" :key="album.mbid" :album="album" :isPlayCount="false"></album>
+      <album class="album" v-for="album of albums" :key="albumKey(album)" :album="album" :isPlayCount="false"></album>
     </div>
   </div>
 </template>
 
 <script>
+import md5 from 'blueimp-md5'
 import store from 'store'
 import lastfm from 'utils/lastfm'
 import Album from 'components/Album'
@@ -23,6 +24,11 @@ export default {
   computed: {
     lastfmUsername () {
       return store.state.lastfmUsername
+    }
+  },
+  methods: {
+    albumKey (album) {
+      return md5(`${album.artistName}${album.name}`)
     }
   },
   created () {

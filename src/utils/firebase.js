@@ -1,5 +1,6 @@
 import * as firebaseApp from 'firebase'
 import { loadingProxyHandler } from 'utils/loading'
+import md5 from 'blueimp-md5'
 
 firebaseApp.initializeApp({
   apiKey: 'AIzaSyADXQSzyrxchFTnesp2yzNGlwCtZvIFrM4',
@@ -49,12 +50,13 @@ const firebaseAPI = {
     })
   },
   createNewAlbumAtomic (album, onComplete) {
-    const url = `/albums/${album.id}`
+    const albumKey = md5(`${album.artistName}${album.name}`)
+    const url = `/albums/${albumKey}`
 
     return new Promise((resolve, reject) => {
       firebaseApp.database().ref(url)
-      .transaction(album => {
-        if (album === null) {
+      .transaction(albumFromDB => {
+        if (albumFromDB === null) {
           const newAlbum = Object.assign({}, album)
           delete newAlbum.playCount
           return newAlbum
