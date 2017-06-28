@@ -8,7 +8,7 @@
 
 <script>
 import store from 'store'
-import { firebase } from 'utils/api'
+import firebase from 'utils/firebase'
 import Album from 'components/Album'
 
 export default {

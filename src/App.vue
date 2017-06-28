@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { firebase } from 'utils/api'
+import firebase from 'utils/firebase'
 import store from 'store'
 
 export default {

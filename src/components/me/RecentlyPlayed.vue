@@ -8,7 +8,7 @@
 
 <script>
 import store from 'store'
-import { lastfm } from 'utils/api'
+import lastfm from 'utils/lastfm'
 import Album from 'components/Album'
 
 export default {

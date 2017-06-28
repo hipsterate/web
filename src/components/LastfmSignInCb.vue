@@ -4,7 +4,8 @@
 
 <script>
 import store from 'store'
-import { firebase, lastfm } from 'utils/api'
+import firebase from 'utils/firebase'
+import lastfm from 'utils/lastfm'
 import xml from 'utils/xml'
 
 export default {

@@ -20,7 +20,7 @@
 
 <script>
 import store from 'store'
-import { firebase } from 'utils/api'
+import firebase from 'utils/firebase'
 
 export default {
   props: ['album', 'isPlayCount'],
