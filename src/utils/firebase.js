@@ -11,9 +11,7 @@ firebaseApp.initializeApp({
 })
 
 const firebaseAPI = {
-  timestamp () {
-    return new Promise((resolve, reject) => resolve(firebaseApp.database.ServerValue.TIMESTAMP))
-  },
+  timestamp: firebaseApp.database.ServerValue.TIMESTAMP,
   signIn () {
     return new Promise((resolve, reject) => {
       const provider = new firebaseApp.auth.GoogleAuthProvider()

@@ -36,10 +36,8 @@ export default {
         const newAlbum = Object.assign({}, this.album)
         newAlbum.rating = this.rating
         newAlbum.lastfmUsername = store.state.lastfmUsername
-        newAlbum.updatedAt = firebase.timestamp()
+        newAlbum.updatedAt = firebase.timestamp
         delete newAlbum.playCount
-
-        console.log(newAlbum)
 
         if (!error) {
           let updates = {}

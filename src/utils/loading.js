@@ -2,9 +2,9 @@ import { Loading } from 'quasar'
 
 const loadingManager = {
   count: 0,
-  start () {
+  start (key) {
     this.count += 1
-    console.log('api start', this.count)
+    console.log(key, 'api start', this.count)
 
     if (!Loading.isActive()) {
       Loading.show({
@@ -25,9 +25,12 @@ const loadingManager = {
 
 export const loadingProxyHandler = {
   get (target, key, receiver) {
-    loadingManager.start()
     const originProperty = Reflect.get(target, key, receiver)
+    if (typeof originProperty !== 'function') {
+      return originProperty
+    }
 
+    loadingManager.start(key)
     return (...args) => {
       const proxiedApi = new Promise((resolve, reject) => {
         originProperty.apply(this, args).then(result => {
