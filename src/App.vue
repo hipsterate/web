@@ -66,6 +66,12 @@ export default {
     goMe () {
       this.$router.push({ name: 'me' })
     }
+  },
+  created () {
+    firebase.onAuthChanged()
+    .then(user => {
+      store.setUser(user)
+    })
   }
 }
 </script>
