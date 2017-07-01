@@ -4,7 +4,7 @@ const loadingManager = {
   count: 0,
   start (key) {
     this.count += 1
-    console.log(key, 'api start', this.count)
+    // console.log(key, 'api start', this.count)
 
     if (!Loading.isActive()) {
       Loading.show({
@@ -15,7 +15,7 @@ const loadingManager = {
   },
   end (key, args) {
     this.count -= 1
-    console.log(key, args, 'api end', this.count)
+    // console.log(key, args, 'api end', this.count)
 
     if (this.count === 0) {
       Loading.hide()

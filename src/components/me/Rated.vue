@@ -1,12 +1,14 @@
 <template>
   <div>
-    <div class="album-grid" v-if="isAlbums">
-      <album class="album" v-for="album of albums" :key="albumKey(album)" :album="album" :isPlayCount="false"></album>
-    </div>
-    <div v-else>
-      아직 평가한 앨범이 없어요 ㅜㅅㅜ
-      위의 "최근 들은 앨범" 메뉴로 이동해서 평가를 시작하세요!
-    </div>
+    <template v-if="albums !== null">
+      <div class="album-grid" v-if="albums.length">
+        <album class="album" v-for="album of albums" :key="albumKey(album)" :album="album" :isPlayCount="false"></album>
+      </div>
+      <div v-else>
+        아직 평가한 앨범이 없어요 ㅜㅅㅜ<br>
+        위의 "최근 들은 앨범" 메뉴로 이동해서 평가를 시작하세요!
+      </div>
+    </template>
   </div>
 </template>
 
@@ -23,17 +25,6 @@ export default {
   data () {
     return {
       albums: null
-    }
-  },
-  computed: {
-    isAlbums () {
-      if (this.albums !== null) {
-        if (this.albums.length) {
-          return true
-        }
-      }
-
-      return false
     }
   },
   methods: {
