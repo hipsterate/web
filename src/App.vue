@@ -11,7 +11,7 @@
 
         <button v-if="!user" @click="signIn">
           <i>supervisor_account</i>
-          Sign in
+          Sign In
         </button>
         <button v-else @click="goMe">
           {{ user.email }}
@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import firebase from 'utils/firebase'
 import store from 'store'
+import firebase from 'utils/firebase'
 
 export default {
   data () {

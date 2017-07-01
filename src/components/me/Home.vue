@@ -13,6 +13,7 @@
         <router-link :to="{ name: 'me-rated' }">
           <button class="dark">Rated</button>
         </router-link>
+        <button class="dark" @click="signOut">Sign Out</button>
       </div>
     </div>
 
@@ -22,6 +23,7 @@
 
 <script>
 import store from 'store'
+import firebase from 'utils/firebase'
 
 export default {
   data () {
@@ -36,6 +38,14 @@ export default {
   methods: {
     lastfmSignIn: function () {
       window.open(`${process.env.LASTFM_AUTH_PAGE}/auth/?api_key=${process.env.LASTFM_API_KEY}&cb=${process.env.LASTFM_SIGNIN_CB}`)
+    },
+    signOut () {
+      firebase.signOut()
+      .then(result => {
+        store.setUser(null)
+        this.$router.push({ name: 'home' })
+      })
+      .catch(error => console.log(error))
     }
   }
 }
