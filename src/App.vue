@@ -13,15 +13,8 @@
           <i>supervisor_account</i>
           Sign in
         </button>
-        <button v-else>
+        <button v-else @click="goMe">
           {{ user.email }}
-
-          <q-popover ref="popover">
-            <div>
-              <div @click="goMe(), $refs.popover.close()">My Page</div>
-              <div @click="signOut(), $refs.popover.close()">Sign Out</div>
-            </div>
-          </q-popover>
         </button>
       </div>
 
@@ -52,14 +45,6 @@ export default {
       .then(result => {
         store.setUser(result.user)
         this.$router.push({ name: 'me' })
-      })
-      .catch(error => console.log(error))
-    },
-    signOut () {
-      firebase.signOut()
-      .then(result => {
-        store.setUser(null)
-        this.$router.push({ name: 'home' })
       })
       .catch(error => console.log(error))
     },
