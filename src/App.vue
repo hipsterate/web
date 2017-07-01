@@ -1,7 +1,6 @@
 <template>
   <q-app>
     <q-layout>
-
       <div slot="header" class="toolbar dark">
         <router-link class="go-home" :to="{ name: 'home' }">
           <q-toolbar-title :padding="0">
@@ -19,7 +18,6 @@
       </div>
 
       <router-view class="layout-view"></router-view>
-
     </q-layout>
   </q-app>
 </template>
