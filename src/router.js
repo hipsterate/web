@@ -50,7 +50,7 @@ router.beforeEach((to, from, next) => {
       else {
         Dialog.create({
           title: '로그인',
-          message: '로그인이 필요한 메뉴입니다. 홈으로 돌아갑니다.',
+          message: '로그인이 필요한 메뉴에요 ㅜㅅㅜ 홈으로 돌아갈게요.',
           buttons: [{
             label: '확인',
             handler () {

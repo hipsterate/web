@@ -45,7 +45,7 @@ export default {
 
       Dialog.create({
         title: '로그아웃',
-        message: '정말 로그아웃 하시겠어요?',
+        message: '정말 로그아웃 하실 건가요? ㅜㅅㅜ',
         buttons: [{
           label: '네',
           handler () {
@@ -56,6 +56,8 @@ export default {
             })
             .catch(error => console.log(error))
           }
+        }, {
+          label: '그럴리가요'
         }]
       })
     }
