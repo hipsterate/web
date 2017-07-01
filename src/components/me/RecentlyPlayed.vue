@@ -5,7 +5,7 @@
         <album class="album" v-for="album of albums" :key="albumKey(album)" :album="album" :isPlayCount="true"></album>
       </div>
       <div v-else>
-        아직 Last.fm을 통해 업로드 된 앨범이 없어요!
+        아직 Last.fm에 업로드된 앨범이 없어요 ㅜㅅㅜ
       </div>
     </template>
   </div>

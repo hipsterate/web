@@ -50,6 +50,17 @@ export default {
 </script>
 
 <style scoped>
+.rated {
+  position: relative;
+  overflow: visible;
+}
+
+.classify-type {
+  position: absolute;
+  top: -4em;
+  right: 2em;
+}
+
 .album-grid {
   width: 100%;
   display: flex;

@@ -11,7 +11,6 @@ export default {
 
 <style scoped>
 .home-container {
-  padding-left: 1em;
-  padding-right: 1em;
+  padding: 1em 2em 2em 2em;
 }
 </style>
