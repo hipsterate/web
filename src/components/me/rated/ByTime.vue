@@ -11,8 +11,15 @@
 </template>
 
 <script>
+import md5 from 'blueimp-md5'
+
 export default {
   props: ['albums', 'order'],
+  methods: {
+    albumKey (album) {
+      return md5(`${album.artistName}${album.name}`)
+    }
+  },
   created () {
     if (this.order === 'asc') {
       this.sortedAlbums = this.albums.sort((a, b) => a.updatedAt - b.updatedAt)

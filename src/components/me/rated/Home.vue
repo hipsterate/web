@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import md5 from 'blueimp-md5'
 import store from 'store'
 import firebase from 'utils/firebase'
 import Album from 'components/Album'
@@ -49,11 +48,6 @@ export default {
     },
     byTimeOrder () {
       return this.selectedClassifyType.substr(-3).toLowerCase()
-    }
-  },
-  methods: {
-    albumKey (album) {
-      return md5(`${album.artistName}${album.name}`)
     }
   },
   created () {
