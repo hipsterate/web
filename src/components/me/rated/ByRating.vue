@@ -4,7 +4,7 @@
       <div v-for="(currentAlbums, i) of reversedClassifiedAlbums">
         <template v-if="currentAlbums.length">
           <div class="rating">
-            <span class="label bg-dark text-white">
+            <span class="label bg-blue-grey-10 text-white">
               <i class="left-detail">star</i> {{10 - i}}
             </span>
           </div>
@@ -58,6 +58,7 @@ export default {
 
 <style scoped>
 .rating {
+  padding-left: 2em;
   margin-bottom: 1em;
 }
 

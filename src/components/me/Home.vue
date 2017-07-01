@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="me-container">
+  <div class="me-container">
+    <div class="me-navigation">
       <div v-if="!lastfmUsername">
         <button class="dark" @click="lastfmSignIn">Last.fm 로그인</button>
       </div>
@@ -8,12 +8,12 @@
         <h4>안녕하세요 {{ lastfmUsername }}님!</h4>
 
         <router-link :to="{ name: 'me-recentlyPlayed' }">
-          <button class="dark">최근 들은 앨범</button>
+          <button class="bg-blue-grey-10 router-link">최근 들은 앨범</button>
         </router-link>
         <router-link :to="{ name: 'me-rated' }">
-          <button class="dark">평가한 앨범</button>
+          <button class="bg-blue-grey-10 router-link">평가한 앨범</button>
         </router-link>
-        <button class="dark" @click="signOut">로그아웃</button>
+        <button class="bg-blue-grey-10" @click="signOut">로그아웃</button>
       </div>
     </div>
 
@@ -67,6 +67,15 @@ export default {
 
 <style scoped>
 .me-container {
+  background-color: black;
+  color: white;
+}
+
+.me-navigation {
   padding: 1em 2em 2em 2em;
+}
+
+.router-link {
+  color: white;
 }
 </style>

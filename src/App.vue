@@ -1,7 +1,7 @@
 <template>
   <q-app>
     <q-layout>
-      <div slot="header" class="toolbar dark">
+      <div slot="header" class="toolbar bg-blue-grey-10">
         <router-link class="go-home" :to="{ name: 'home' }">
           <q-toolbar-title :padding="0">
             Hipsterate
@@ -17,7 +17,7 @@
         </button>
       </div>
 
-      <router-view class="layout-view"></router-view>
+      <router-view class="layout-view content"></router-view>
     </q-layout>
   </q-app>
 </template>
