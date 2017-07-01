@@ -13,14 +13,13 @@
 
 <script>
 import store from 'store'
-import firebase from 'utils/firebase'
-import Album from 'components/Album'
 import ByTime from 'components/me/rated/ByTime'
 import ByRating from 'components/me/rated/ByRating'
+import firebase from 'utils/firebase'
 
 export default {
   components: {
-    Album, ByTime, ByRating
+    ByTime, ByRating
   },
   data () {
     return {
@@ -40,7 +39,7 @@ export default {
   },
   computed: {
     isByTime () {
-      if (this.selectedClassifyType === 'timeAsc' || this.selectedClassifyType === 'timeAsc') {
+      if (this.selectedClassifyType === 'timeAsc' || this.selectedClassifyType === 'timeDsc') {
         return true
       }
 
@@ -75,19 +74,5 @@ export default {
   position: absolute;
   top: -4em;
   right: 2em;
-}
-
-.album-grid {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: strech;
-  align-content: strech;
-}
-
-.album-grid>.album {
-  flex-basis: 200px;
-  flex-grow: 1;
 }
 </style>

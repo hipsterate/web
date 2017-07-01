@@ -12,9 +12,13 @@
 
 <script>
 import md5 from 'blueimp-md5'
+import Album from 'components/Album'
 
 export default {
   props: ['albums', 'order'],
+  components: {
+    Album
+  },
   methods: {
     albumKey (album) {
       return md5(`${album.artistName}${album.name}`)
@@ -30,3 +34,19 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.album-grid {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: strech;
+  align-content: strech;
+}
+
+.album-grid>.album {
+  flex-basis: 200px;
+  flex-grow: 1;
+}
+</style>
