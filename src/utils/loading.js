@@ -33,7 +33,8 @@ export const loadingProxyHandler = {
     loadingManager.start(key)
     return (...args) => {
       const proxiedApi = new Promise((resolve, reject) => {
-        originProperty.apply(this, args).then(result => {
+        originProperty.apply(this, args)
+        .then(result => {
           resolve(result)
           loadingManager.end(key, args)
         })
