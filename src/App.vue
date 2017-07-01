@@ -11,7 +11,7 @@
 
         <button v-if="!user" @click="signIn">
           <i>supervisor_account</i>
-          Sign In
+          로그인
         </button>
         <button v-else @click="goMe">
           {{ user.email }}

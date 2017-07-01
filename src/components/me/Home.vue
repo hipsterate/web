@@ -5,15 +5,15 @@
         <button class="dark" @click="lastfmSignIn">Please signin with Last.fm!</button>
       </div>
       <div v-else>
-        <h4>Hello, {{ lastfmUsername }}!</h4>
+        <h4>안녕하세요 {{ lastfmUsername }}님!</h4>
 
         <router-link :to="{ name: 'me-recentlyPlayed' }">
-          <button class="dark">Recently Played</button>
+          <button class="dark">최근 들은 앨범</button>
         </router-link>
         <router-link :to="{ name: 'me-rated' }">
-          <button class="dark">Rated</button>
+          <button class="dark">평가한 앨범</button>
         </router-link>
-        <button class="dark" @click="signOut">Sign Out</button>
+        <button class="dark" @click="signOut">로그아웃</button>
       </div>
     </div>
 
@@ -53,6 +53,8 @@ export default {
 
 <style scoped>
 .me-container {
-  padding: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 1em;
 }
 </style>
