@@ -2,7 +2,7 @@
   <div>
     <div class="me-container">
       <div v-if="!lastfmUsername">
-        <button class="dark" @click="lastfmSignIn">Please signin with Last.fm!</button>
+        <button class="dark" @click="lastfmSignIn">Last.fm 로그인</button>
       </div>
       <div v-else>
         <h4>안녕하세요 {{ lastfmUsername }}님!</h4>
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { Dialog } from 'quasar'
 import store from 'store'
 import firebase from 'utils/firebase'
 
@@ -40,12 +41,25 @@ export default {
       window.open(`${process.env.LASTFM_AUTH_PAGE}/auth/?api_key=${process.env.LASTFM_API_KEY}&cb=${process.env.LASTFM_SIGNIN_CB}`)
     },
     signOut () {
-      firebase.signOut()
-      .then(result => {
-        store.setUser(null)
-        this.$router.push({ name: 'home' })
+      const vm = this
+
+      Dialog.create({
+        title: '로그아웃',
+        message: '정말 로그아웃 하시겠어요?',
+        buttons: [
+          {
+            label: '네',
+            handler () {
+              firebase.signOut()
+              .then(result => {
+                store.setUser(null)
+                vm.$router.push({ name: 'home' })
+              })
+              .catch(error => console.log(error))
+            }
+          }
+        ]
       })
-      .catch(error => console.log(error))
     }
   }
 }
@@ -53,8 +67,6 @@ export default {
 
 <style scoped>
 .me-container {
-  padding-left: 1em;
-  padding-right: 1em;
-  padding-bottom: 1em;
+  padding: 1em 2em 2em 2em;
 }
 </style>
