@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { Dialog } from 'quasar'
+import store from 'store'
 import firebase from 'utils/firebase'
-import store from './store'
 
 Vue.use(VueRouter)
 
@@ -47,8 +48,16 @@ router.beforeEach((to, from, next) => {
         next()
       }
       else {
-        alert('Please signin first!')
-        next({ name: 'home' })
+        Dialog.create({
+          title: '로그인',
+          message: '로그인이 필요한 메뉴입니다. 홈으로 돌아갑니다.',
+          buttons: [{
+            label: '확인',
+            handler () {
+              next({ name: 'home' })
+            }
+          }]
+        })
       }
     })
 

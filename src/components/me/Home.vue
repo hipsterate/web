@@ -46,19 +46,17 @@ export default {
       Dialog.create({
         title: '로그아웃',
         message: '정말 로그아웃 하시겠어요?',
-        buttons: [
-          {
-            label: '네',
-            handler () {
-              firebase.signOut()
-              .then(result => {
-                store.setUser(null)
-                vm.$router.push({ name: 'home' })
-              })
-              .catch(error => console.log(error))
-            }
+        buttons: [{
+          label: '네',
+          handler () {
+            firebase.signOut()
+            .then(result => {
+              store.setUser(null)
+              vm.$router.push({ name: 'home' })
+            })
+            .catch(error => console.log(error))
           }
-        ]
+        }]
       })
     }
   }
