@@ -6,9 +6,7 @@
       </div>
       <div v-else>
         <h4>Hello, {{ lastfmUsername }}!</h4>
-      </div>
 
-      <div>
         <router-link :to="{ name: 'me-recentlyPlayed' }">
           <button class="dark">Recently Played</button>
         </router-link>
