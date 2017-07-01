@@ -15,10 +15,10 @@ export default {
   props: ['albums', 'order'],
   created () {
     if (this.order === 'asc') {
-      this.sortedAlbums = this.albums.sort(orderFunc = (a, b) => a.updatedAt - b.updatedAt)
+      this.sortedAlbums = this.albums.sort((a, b) => a.updatedAt - b.updatedAt)
     }
     else {
-      this.sortedAlbums = this.albums.sort(orderFunc = (a, b) => b.updatedAt - a.updatedAt)
+      this.sortedAlbums = this.albums.sort((a, b) => b.updatedAt - a.updatedAt)
     }
   }
 }
