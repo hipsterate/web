@@ -13,19 +13,45 @@ function load (component) {
 const router = new VueRouter({
   mode: 'history',
   routes: [
-    { path: '/', name: 'home', component: load('Home') },
+    {
+      path: '/',
+      name: 'home',
+      component: load('Home')
+    },
     {
       path: '/me',
       name: 'me',
       component: load('me/Home'),
       meta: { authRequired: true },
-      children: [
-        { path: 'recentlyplayed', name: 'me-recentlyPlayed', component: load('me/RecentlyPlayed') },
-        { path: 'rated', name: 'me-rated', component: load('me/Rated') }
-      ]
+      children: [{
+        path: 'recentlyplayed',
+        name: 'me-recentlyPlayed',
+        component: load('me/RecentlyPlayed')
+      }, {
+        path: 'rated',
+        name: 'me-rated',
+        component: load('me/rated/Home'),
+        children: [{
+          path: 'bytime',
+          name: 'me-rated-bytime',
+          component: load('me/rated/bytime')
+        }, {
+          path: 'byrating',
+          name: 'me-rated-byrating',
+          component: load('me/rated/byrating')
+        }]
+      }]
     },
-    { path: '/lastfmsignincb', component: load('LastfmSignInCb'), name: 'lastfm-signin-cb', meta: { authRequired: true } },
-    { path: '*', component: load('Error404') }
+    {
+      path: '/lastfmsignincb',
+      component: load('LastfmSignInCb'),
+      name: 'lastfm-signin-cb',
+      meta: { authRequired: true }
+    },
+    {
+      path: '*',
+      component: load('Error404')
+    }
   ]
 })
 
