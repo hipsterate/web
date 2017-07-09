@@ -61,6 +61,9 @@ export default {
         }]
       })
     }
+  },
+  created () {
+    this.$emit('toolbarStyle', 'me')
   }
 }
 </script>

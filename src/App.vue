@@ -1,6 +1,6 @@
 <template>
   <q-app>
-    <q-layout>
+    <q-layout :class="{ transperent: isHome }">
       <div slot="header" class="toolbar bg-blue-grey-10">
         <router-link class="go-home" :to="{ name: 'home' }">
           <q-toolbar-title :padding="0">
@@ -17,7 +17,7 @@
         </button>
       </div>
 
-      <router-view class="layout-view content"></router-view>
+      <router-view class="layout-view content" v-on:toolbarStyle="changeToolbarStyle"></router-view>
     </q-layout>
   </q-app>
 </template>
@@ -29,7 +29,8 @@ import firebase from 'utils/firebase'
 export default {
   data () {
     return {
-      store: store
+      store: store,
+      isHome: true
     }
   },
   computed: {
@@ -48,6 +49,14 @@ export default {
     },
     goMe () {
       this.$router.push({ name: 'me' })
+    },
+    changeToolbarStyle (where) {
+      if (where === 'home') {
+        this.isHome = true
+      }
+      else {
+        this.isHome = false
+      }
     }
   },
   created () {
@@ -62,5 +71,9 @@ export default {
 <style scoped>
 .go-home {
   color: #fff;
+}
+
+.transperent {
+  opacity: 0.7;
 }
 </style>
