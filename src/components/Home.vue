@@ -1,32 +1,20 @@
 <template>
-  <div class="home">
+  <div>
     <div class="home-container">
+      <div class="info">
+        <h3 class="title">Hipsterate</h3>
+        <p class="description"><a href="https://www.last.fm" target="_blank">Last.fm</a> 을 통해 들은 앨범에 별점을 주세요!</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
-    return {
-      videoUrl: 'https://www.youtube.com/embed/TZD7CNRSq28'
-    }
-  },
-  computed: {
-    optionedVideoUrl () {
-      let options = '?'
-      options += 'autoplay=1'
-      options += '&loop=1'
-      options += '&rel=0'
-      options += '&controls=0'
-      options += '&disablekb=1'
-      return this.videoUrl + options
-    }
-  }
 }
 </script>
 
-<style>
+<style scoped>
 .home-container {
   min-width: 100%;
   min-height: 100%;
@@ -36,6 +24,20 @@ export default {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+.home-container>.info {
+  padding: 2em 10em;
+  color: white;
+}
+
+.home-container>.info>.title {
+  font-weight: 500;
+}
+
+.home-container>.info>.description {
+}
+</style>
+
+<style>
 #video-background {
   position: fixed;
   right: 0;
