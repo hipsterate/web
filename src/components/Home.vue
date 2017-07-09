@@ -24,7 +24,7 @@ export default {
   width: auto;
   height: auto;
   padding: 1em 2em 2em 2em;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 1);
 }
 
 .home-container>.info {

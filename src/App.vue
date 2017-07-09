@@ -7,7 +7,6 @@
             Hipsterate
           </q-toolbar-title>
         </router-link>
-
         <button v-if="!user" @click="signIn">
           <i>supervisor_account</i>
           로그인
