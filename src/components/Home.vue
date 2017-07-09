@@ -1,9 +1,7 @@
 <template>
-  <div>
+  <div class="home">
     <div class="home-container">
     </div>
-
-    <iframe id="video-background" :src="optionedVideoUrl" frameborder="0" allowfullscreen></iframe>
   </div>
 </template>
 
@@ -28,7 +26,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .home-container {
   min-width: 100%;
   min-height: 100%;

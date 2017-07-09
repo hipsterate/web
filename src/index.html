@@ -10,6 +10,34 @@
     <link rel="shortcut icon" type="image/x-icon" href="statics/favicon.ico">
   </head>
   <body>
+    <div id="video-background"></div>
+    <script type="text/javascript" src="https://www.youtube.com/iframe_api"></script>
+    <script type="text/javascript">
+      var player;
+
+      function onYouTubeIframeAPIReady () {
+        player = new YT.Player('video-background', {
+          videoId: 'TZD7CNRSq28',
+          playerVars: {
+            controls: 0,
+            disabledb: 0,
+            rel: 0,
+            showinf0: 0,
+            start: 67,
+            loop: 1
+          },
+          events: {
+            onReady: onPlayerReady
+          }
+        });
+      }
+
+      function onPlayerReady (event) {
+        event.target.playVideo();
+        player.mute();
+      }
+    </script>
+
     <div id="q-app"></div>
     <!-- built files will be auto injected -->
   </body>
