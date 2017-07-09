@@ -20,9 +20,10 @@
           videoId: 'TZD7CNRSq28',
           playerVars: {
             controls: 0,
-            disabledb: 0,
+            disablekb: 0,
             rel: 0,
-            showinf0: 0,
+            showinfo: 0,
+            autoplay: 1,
             start: 67,
             loop: 1
           },
@@ -33,7 +34,6 @@
       }
 
       function onPlayerReady (event) {
-        event.target.playVideo();
         player.mute();
       }
     </script>
