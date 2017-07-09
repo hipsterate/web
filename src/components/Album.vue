@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="album-container" @mouseenter="info = true" @mouseleave="info = false">
+    <div :id="key" class="album-container" @mouseenter="info = true" @mouseleave="info = false">
 
       <img class="image" :src="album.image">
 
@@ -11,7 +11,7 @@
           <span class="count">{{ album.playCount }}</span><span class="times">time<span v-if="album.playCount > 1">s</span></span>
         </div>
 
-        <q-rating class="rating" v-model="rating" :max="10" @input="rate"></q-rating>
+        <q-rating class="rating" :style="ratingSize" v-model="rating" :max="10" @input="rate"></q-rating>
       </div>
 
     </div>
@@ -28,7 +28,8 @@ export default {
   data () {
     return {
       info: false,
-      rating: 0
+      rating: 0,
+      ratingSize: null
     }
   },
   computed: {
@@ -65,6 +66,14 @@ export default {
         this.rating = value.rating
       }
     })
+  },
+  mounted () {
+    const container = document.querySelector(`#22${this.key}`)
+    this.ratingSize = {
+      fontSize: `${container.offsetWidth * 0.12}px`
+    }
+    console.log('container', container.offsetWidth)
+    console.log('rating', container.offsetWidth * 0.12)
   }
 }
 </script>
@@ -110,14 +119,14 @@ export default {
 }
 
 .album-container>.info>.play-count {
-  height: 50%;
-  margin: 20% 0 0 0;
+  height: 35%;
+  margin: 25% 0 0 0;
   text-align: center;
 }
 
 .album-container>.info>.play-count>.count {
   color: #fff;
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: 600;
 }
 
@@ -130,10 +139,8 @@ export default {
 }
 
 .album-container>.info>.rating {
-  margin: 10% 0 0 0;
-  height: 10%;
-
-  font-size: 0.8em;
+  margin: 0 0 0 0;
+  
   text-align: center;
 }
 
