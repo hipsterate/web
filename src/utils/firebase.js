@@ -13,9 +13,16 @@ firebaseApp.initializeApp({
 
 const firebaseAPI = {
   timestamp: firebaseApp.database.ServerValue.TIMESTAMP,
-  signIn () {
+  signIn (providerName) {
     return new Promise((resolve, reject) => {
-      const provider = new firebaseApp.auth.GoogleAuthProvider()
+      let provider = null
+
+      if (providerName === 'google') {
+        provider = new firebaseApp.auth.GoogleAuthProvider()
+      }
+      else if (providerName === 'facebook') {
+        provider = new firebaseApp.auth.FacebookAuthProvider()
+      }
 
       firebaseApp.auth().signInWithPopup(provider)
       .then(result => resolve(result))

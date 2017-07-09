@@ -7,7 +7,7 @@
             Hipsterate
           </q-toolbar-title>
         </router-link>
-        <button v-if="!user" @click="signIn">
+        <button v-if="!user" @click="signInDialog">
           <i>supervisor_account</i>
           로그인
         </button>
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { Dialog } from 'quasar'
 import store from 'store'
 import firebase from 'utils/firebase'
 
@@ -38,8 +39,29 @@ export default {
     }
   },
   methods: {
-    signIn () {
-      firebase.signIn()
+    signInDialog () {
+      const vm = this
+
+      Dialog.create({
+        title: '로그인',
+        message: '로그인 할 계정 타입을 선택해주세요!',
+        stackButtons: true,
+        buttons: [{
+          label: 'Google',
+          handler () {
+            console.log('google')
+            vm.signIn('google')
+          }
+        }, {
+          label: 'Facebook',
+          handler () {
+            vm.signIn('facebook')
+          }
+        }]
+      })
+    },
+    signIn (provider) {
+      firebase.signIn(provider)
       .then(result => {
         store.setUser(result.user)
         this.$router.push({ name: 'me' })
