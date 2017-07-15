@@ -11,7 +11,18 @@
           <span class="count">{{ album.playCount }}</span><span class="times">time<span v-if="album.playCount > 1">s</span></span>
         </div>
 
-        <q-rating class="rating" :style="ratingSize" v-model="rating" :max="10" @input="rate"></q-rating>
+        <fieldset class="rating">
+          <i :class="star10" class="star rating10" @click="rate(10)"></i>
+          <i :class="star9" class="star rating9 half" @click="rate(9)"></i>
+          <i :class="star8" class="star rating8" @click="rate(8)"></i>
+          <i :class="star7" class="star rating7 half" @click="rate(7)"></i>
+          <i :class="star6" class="star rating6" @click="rate(6)"></i>
+          <i :class="star5" class="star rating5 half" @click="rate(5)"></i>
+          <i :class="star4" class="star rating4" @click="rate(4)"></i>
+          <i :class="star3" class="star rating3 half" @click="rate(3)"></i>
+          <i :class="star2" class="star rating2" @click="rate(2)"></i>
+          <i :class="star1" class="star rating1 half" @click="rate(1)"></i>
+        </fieldset>
       </div>
 
     </div>
@@ -29,7 +40,16 @@ export default {
     return {
       info: false,
       rating: 0,
-      ratingSize: null
+      star10: { selected: false },
+      star9: { selected: false },
+      star8: { selected: false },
+      star7: { selected: false },
+      star6: { selected: false },
+      star5: { selected: false },
+      star4: { selected: false },
+      star3: { selected: false },
+      star2: { selected: false },
+      star1: { selected: false }
     }
   },
   computed: {
@@ -38,10 +58,21 @@ export default {
     }
   },
   methods: {
-    rate () {
+    rate (rating) {
+      this.rating = rating
+
+      for (let i of Array(10).keys()) {
+        if (i + 1 === rating) {
+          this[`star${i + 1}`].selected = true
+        }
+        else {
+          this[`star${i + 1}`].selected = false
+        }
+      }
+
       firebase.createNewAlbumAtomic(this.album, (error, commited, snapshot) => {
         const newAlbum = Object.assign({}, this.album)
-        newAlbum.rating = this.rating
+        newAlbum.rating = rating
         newAlbum.lastfmUsername = store.state.lastfmUsername
         newAlbum.updatedAt = firebase.timestamp
         delete newAlbum.playCount
@@ -64,16 +95,17 @@ export default {
 
       if (value) {
         this.rating = value.rating
+
+        for (let i of Array(10).keys()) {
+          if (i + 1 === value.rating) {
+            this[`star${i + 1}`].selected = true
+          }
+          else {
+            this[`star${i + 1}`].selected = false
+          }
+        }
       }
     })
-  },
-  mounted () {
-    const container = document.querySelector(`#22${this.key}`)
-    this.ratingSize = {
-      fontSize: `${container.offsetWidth * 0.12}px`
-    }
-    console.log('container', container.offsetWidth)
-    console.log('rating', container.offsetWidth * 0.12)
   }
 }
 </script>
@@ -118,9 +150,13 @@ export default {
   color: #fff;
 }
 
+.display-hidden {
+  visibility: hidden;
+}
+
 .album-container>.info>.play-count {
-  height: 35%;
-  margin: 25% 0 0 0;
+  height: 45%;
+  margin: 30% 0 0 0;
   text-align: center;
 }
 
@@ -138,13 +174,36 @@ export default {
   font-weight: 300;
 }
 
-.album-container>.info>.rating {
-  margin: 0 0 0 0;
-  
-  text-align: center;
+@import url(//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css);
+
+.rating {
+  margin: 0;
+  padding: 0;
+  border: none;
 }
 
-.display-hidden {
-  visibility: hidden;
+.rating>.star:before {
+  display: inline-block;
+  margin: 0.2em;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  content: "\f005";
+}
+
+.rating>.star.half:before {
+  position: absolute;
+  content: "\f089";
+}
+
+.rating>.star {
+  float: right;
+  cursor: pointer;
+}
+
+.rating>.star.selected,
+.rating>.star.selected~.star,
+.rating>.star:hover,
+.rating>.star:hover~.star {
+  color: #FFD700;
 }
 </style>
