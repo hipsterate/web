@@ -34,25 +34,28 @@ export default {
   methods: {
     albumKey (album) {
       return md5(`${album.artistName}${album.name}`)
+    },
+    fetchTopAlbums (lastfmUsername) {
+      lastfm.getTopAlbums(lastfmUsername)
+      .then(result => result.json())
+      .then(result => {
+        this.albums = result.topalbums.album.map(album => {
+          return {
+            id: album.mbid,
+            name: album.name,
+            image: album.image.slice(-1)[0]['#text'],
+            lastfmLink: album.url,
+            playCount: album.playcount,
+            artistId: album.artist.mbid,
+            artistName: album.artist.name,
+            artistLastfmLink: album.artist.url
+          }
+        })
+      })
     }
   },
-  created () {
-    lastfm.getTopAlbums(this.lastfmUsername)
-    .then(result => result.json())
-    .then(result => {
-      this.albums = result.topalbums.album.map(album => {
-        return {
-          id: album.mbid,
-          name: album.name,
-          image: album.image.slice(-1)[0]['#text'],
-          lastfmLink: album.url,
-          playCount: album.playcount,
-          artistId: album.artist.mbid,
-          artistName: album.artist.name,
-          artistLastfmLink: album.artist.url
-        }
-      })
-    })
+  mounted () {
+    this.fetchTopAlbums(store.state.lastfmUsername)
   }
 }
 </script>

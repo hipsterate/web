@@ -69,9 +69,13 @@ router.beforeEach((to, from, next) => {
           if (value) {
             store.setLastfmUsername(value.lastfmUsername)
           }
-        })
 
-        next()
+          next()
+        })
+        .catch(error => {
+          console.log(error)
+          next()
+        })
       }
       else {
         Dialog.create({
