@@ -56,14 +56,13 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: strech;
   align-content: strech;
 }
 
 .album-grid>.album {
-  min-width: 10em;
-  max-width: 12em;
-  flex-basis: auto;
+  flex-basis: 10em;
   flex-grow: 1;
+  min-width: 10em;
+  max-width: 15em;
 }
 </style>
