@@ -2,7 +2,7 @@
   <div class="me-container">
     <div class="me-navigation">
       <div v-if="!lastfmUsername">
-        <button class="dark" @click="lastfmSignIn">Last.fm 계정 연동</button>
+        <button class="bg-blue-grey-10" @click="lastfmSignIn">Last.fm 계정 연동</button>
         <button class="bg-blue-grey-10" @click="signOut">로그아웃</button>
       </div>
       <div v-else>
