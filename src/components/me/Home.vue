@@ -2,7 +2,8 @@
   <div class="me-container">
     <div class="me-navigation">
       <div v-if="!lastfmUsername">
-        <button class="dark" @click="lastfmSignIn">Last.fm 로그인</button>
+        <button class="dark" @click="lastfmSignIn">Last.fm 계정 연동</button>
+        <button class="bg-blue-grey-10" @click="signOut">로그아웃</button>
       </div>
       <div v-else>
         <h4>안녕하세요 {{ lastfmUsername }}님!</h4>
@@ -13,9 +14,8 @@
         <router-link :to="{ name: 'me-rated' }">
           <button class="bg-blue-grey-10 router-link">평가한 앨범</button>
         </router-link>
+        <button class="bg-blue-grey-10" @click="signOut">로그아웃</button>
       </div>
-
-      <button class="bg-blue-grey-10" @click="signOut">로그아웃</button>
     </div>
 
     <router-view class="layout-view"></router-view>
