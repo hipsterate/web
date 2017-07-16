@@ -68,6 +68,7 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
   align-content: strech;
+  margin-bottom: 2em;
 }
 
 .album-grid>.album {
