@@ -13,8 +13,9 @@
         <router-link :to="{ name: 'me-rated' }">
           <button class="bg-blue-grey-10 router-link">평가한 앨범</button>
         </router-link>
-        <button class="bg-blue-grey-10" @click="signOut">로그아웃</button>
       </div>
+
+      <button class="bg-blue-grey-10" @click="signOut">로그아웃</button>
     </div>
 
     <router-view class="layout-view"></router-view>
