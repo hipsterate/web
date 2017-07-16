@@ -68,7 +68,9 @@ export default {
 }
 
 .album-grid>.album {
-  flex-basis: 10em;
+  min-width: 10em;
+  max-width: 12em;
+  flex-basis: auto;
   flex-grow: 1;
 }
 </style>
