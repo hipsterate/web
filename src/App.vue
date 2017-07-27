@@ -12,7 +12,7 @@
           로그인
         </button>
         <button v-else @click="goMe">
-          {{ user.email }}
+          {{ user.email.split('@')[0] }}
         </button>
       </div>
 
