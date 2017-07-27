@@ -59,6 +59,12 @@ export default {
   },
   methods: {
     rate (rating) {
+      if (this.rating !== rating) {
+        const from = this.rating
+        const to = rating
+        this.$emit('changeRate', this.album, from, to)
+      }
+
       this.rating = rating
 
       for (let i of Array(10).keys()) {

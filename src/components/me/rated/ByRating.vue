@@ -10,7 +10,7 @@
           </div>
 
           <div class="album-grid">
-            <album class="album" v-for="album of currentAlbums" :key="albumKey(album)" :album="album" :isPlayCount="false"></album>
+            <album class="album" v-for="album of currentAlbums" :key="albumKey(album)" :album="album" :isPlayCount="false" @changeRate="changeRate"></album>
           </div>
         </template>
       </div>
@@ -37,7 +37,7 @@ export default {
   },
   computed: {
     reversedClassifiedAlbums () {
-      return this.classifiedAlbums.reverse()
+      return this.classifiedAlbums.slice().reverse()
     },
     isAllAlbumsEmpty () {
       return !this.classifiedAlbums.some(element => element.length !== 0)
@@ -46,6 +46,24 @@ export default {
   methods: {
     albumKey (album) {
       return md5(`${album.artistName}${album.name}`)
+    },
+    changeRate (targetAlbum, from, to) {
+      for (let album of this.classifiedAlbums[from - 1]) {
+        if (targetAlbum.name === album.name && targetAlbum.artistName === album.artistName) {
+          this.remove(album, from)
+          this.add(album, to)
+        }
+      }
+    },
+    remove (album, from) {
+      const fromAlbums = this.classifiedAlbums[from - 1]
+      fromAlbums.splice(fromAlbums.indexOf(album), 1)
+      this.classifiedAlbums.splice(from - 1, 1, fromAlbums)
+    },
+    add (album, to) {
+      const toAlbums = this.classifiedAlbums[to - 1]
+      toAlbums.push(album)
+      this.classifiedAlbums.splice(to - 1, 1, toAlbums)
     }
   },
   created () {
