@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :id="key" class="album-container" @mouseenter="info = true" @mouseleave="info = false">
+    <div :id="key" class="album-container" @mouseenter="info = true" @mouseleave="info = false" @touchstart="info = !info">
 
       <img class="image" :src="album.image">
 
