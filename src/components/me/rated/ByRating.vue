@@ -58,17 +58,30 @@ export default {
     remove (album, from) {
       const fromAlbums = this.classifiedAlbums[from - 1]
       fromAlbums.splice(fromAlbums.indexOf(album), 1)
+      fromAlbums.sort(this.albumsCompare)
       this.classifiedAlbums.splice(from - 1, 1, fromAlbums)
     },
     add (album, to) {
       const toAlbums = this.classifiedAlbums[to - 1]
       toAlbums.push(album)
+      toAlbums.sort(this.albumsCompare)
       this.classifiedAlbums.splice(to - 1, 1, toAlbums)
+    },
+    albumsCompare (a, b) {
+      if (a.artistName < b.artistName) return -1
+      if (a.artistName > b.artistName) return 1
+      if (a.name < b.name) return -1
+      if (a.name > b.name) return 1
+      return 0
     }
   },
   created () {
     for (let album of this.albums) {
       this.classifiedAlbums[album.rating - 1].push(album)
+    }
+
+    for (let albums of this.classifiedAlbums) {
+      albums.sort(this.albumsCompare)
     }
   }
 }
