@@ -191,7 +191,7 @@ export default {
 .rating>.star:before {
   display: inline-block;
   margin: 0.2em;
-  font-size: 1.25em;
+  font-size: 1.20em;
   font-family: FontAwesome;
   content: "\f005";
 }
