@@ -5,7 +5,8 @@ var
   webpack = require('webpack'),
   merge = require('webpack-merge'),
   baseWebpackConfig = require('./webpack.base.conf'),
-  ExtractTextPlugin = require('extract-text-webpack-plugin'),
+  // ExtractTextPlugin = require('extract-text-webpack-plugin'),
+  MiniCssExtractPlugin = require('mini-css-extract-plugin');
   HtmlWebpackPlugin = require('html-webpack-plugin'),
   OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
@@ -34,9 +35,12 @@ module.exports = merge(baseWebpackConfig, {
       }
     }),
     // extract css into its own file
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css'
-    }),
+    })
+    // new ExtractTextPlugin({
+    //   filename: '[name].[contenthash].css'
+    // }),
     new HtmlWebpackPlugin({
       filename: config.build.index,
       template: 'src/index.html',

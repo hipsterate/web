@@ -13,7 +13,6 @@ import router from './router'
 Vue.use(Quasar) // Install Quasar Framework
 
 Quasar.start(() => {
-  /* eslint-disable no-new */
   new Vue({
     el: '#q-app',
     router,
