@@ -6,6 +6,9 @@
   "repository": "git@github.com:hipsterate/web.git",
   "author": "yuyuny <yuyunykk@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "webpack-dev-server --config webpack.config.js --mode development --env.env=dev --watch"
+  },
   "dependencies": {
     "element-ui": "^2.4.11",
     "utility-types": "^2.1.0",
@@ -15,12 +18,16 @@
   "devDependencies": {
     "autoprefixer": "^9.4.3",
     "awesome-typescript-loader": "^5.2.1",
+    "clean-webpack-plugin": "^1.0.0",
     "css-loader": "^2.0.1",
     "fork-ts-checker-webpack-plugin": "^0.5.2",
     "mini-css-extract-plugin": "^0.5.0",
+    "node-sass": "^4.11.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^3.0.0",
     "style-loader": "^0.23.1",
     "tslint": "^5.11.0",
+    "tslint-config-standard": "^8.0.1",
     "tslint-loader": "^3.5.4",
     "typescript": "^3.2.2",
     "uglifyjs-webpack-plugin": "^2.0.1",
