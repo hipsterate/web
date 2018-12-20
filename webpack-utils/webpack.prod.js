@@ -4,6 +4,7 @@ const autoprefixer = require("autoprefixer");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "production",
@@ -69,6 +70,9 @@ module.exports = {
       // both options are optional
       filename: "[name].[hash].css",
       chunkFilename: "[id].[hash].css"
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "../templates/template.ejs")
     })
   ]
 };

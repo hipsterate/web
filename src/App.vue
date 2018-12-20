@@ -26,7 +26,7 @@ import firebase from "utils/firebase";
 @Component
 export default class App extends Vue {
   store = store;
-  isHome: true;
+  isHome = true;
 
   created() {
     firebase.onAuthChanged().then(user => {

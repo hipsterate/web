@@ -2,6 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 module.exports = {
   entry: path.resolve(__dirname, "../src/main.ts"),
@@ -15,23 +16,17 @@ module.exports = {
       },
       {
         test: /\.tsx?$/,
-        loader: "awesome-typescript-loader",
+        loader: "ts-loader",
         exclude: /node_modules|vue\/src/,
         options: {
           appendTsSuffixTo: [/\.vue$/],
-          transpileOnly: true,
-          isolatedModules: true
+          transpileOnly: true
         }
       },
       {
         test: /\.vue$/,
         exclude: /node_modules/,
-        loader: "vue-loader",
-        options: {
-          loaders: {
-            ts: "awesome-typescript-loader!tslint-loader"
-          }
-        }
+        loader: "vue-loader"
       }
     ]
   },
@@ -50,6 +45,7 @@ module.exports = {
     new ForkTsCheckerWebpackPlugin({
       reportFiles: ["src/**/*.{ts,tsx}"],
       watch: ["src/**/*.{ts,tsx}"]
-    })
+    }),
+    new VueLoaderPlugin()
   ]
 };
