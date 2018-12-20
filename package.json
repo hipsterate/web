@@ -7,7 +7,8 @@
   "author": "yuyuny <yuyunykk@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack-dev-server --config webpack.config.js --mode development --env.env=dev --watch"
+    "start": "webpack-dev-server --config webpack.config.js --mode development --env.env=dev --watch --open",
+    "build": "webpack --config webpack.config.js --mode production --env.env=prod"
   },
   "dependencies": {
     "element-ui": "^2.4.11",
