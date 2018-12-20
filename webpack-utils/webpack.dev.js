@@ -18,7 +18,7 @@ module.exports = {
   devServer: {
     compress: true,
     historyApiFallback: {
-      index: "index.html"
+      index: "src/index.html"
     },
     hot: true,
     noInfo: false,

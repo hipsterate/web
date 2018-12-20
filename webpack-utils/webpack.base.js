@@ -16,15 +16,22 @@ module.exports = {
       {
         test: /\.tsx?$/,
         loader: "awesome-typescript-loader",
-        exclude: /node_modules/,
+        exclude: /node_modules|vue\/src/,
         options: {
-          appendTsSuffixTo: [/\.vue$/]
+          appendTsSuffixTo: [/\.vue$/],
+          transpileOnly: true,
+          isolatedModules: true
         }
       },
       {
         test: /\.vue$/,
         exclude: /node_modules/,
-        loader: "vue-loader"
+        loader: "vue-loader",
+        options: {
+          loaders: {
+            ts: "awesome-typescript-loader!tslint-loader"
+          }
+        }
       }
     ]
   },
