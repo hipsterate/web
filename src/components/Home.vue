@@ -4,7 +4,8 @@
       <div class="info">
         <h3 class="title">Hipsterate</h3>
         <p class="description">
-          <a href="https://www.last.fm" target="_blank">Last.fm</a> 을 통해 들은 앨범에 별점을 주세요!
+          <a href="https://www.last.fm" target="_blank">Last.fm</a> 을 통해 들은
+          앨범에 별점을 주세요!
         </p>
       </div>
     </div>
@@ -12,13 +13,13 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
+import Vue from 'vue';
+import Component from 'vue-class-component';
 
 @Component
 export default class Home extends Vue {
   created(): void {
-    this.$emit("toolbarStyle", "home");
+    // this.$emit('toolbarStyle', 'home');
   }
 }
 </script>
@@ -40,8 +41,5 @@ export default class Home extends Vue {
 
 .home-container > .info > .title {
   font-weight: 500;
-}
-
-.home-container > .info > .description {
 }
 </style>

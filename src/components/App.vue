@@ -14,18 +14,17 @@
 
     </q-layout>
   </q-app>-->
-  <NavBar>
-    <router-view
-      class="layout-view content"
-      @:toolbarStyle="changeToolbarStyle"
-    ></router-view>
-  </NavBar>
+  <!-- <router-view
+    class="layout-view content"
+    @:toolbarStyle="changeToolbarStyle"
+  ></router-view>-->
+  <NavBar />
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import NavBar from './components/app/NavBar.vue';
+import NavBar from './app/NavBar.vue';
 
 @Component({
   components: { NavBar },
