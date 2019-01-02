@@ -13,7 +13,7 @@ module.exports = {
         enforce: 'pre',
         test: /\.(ts|vue)$/,
         exclude: /node_modules/,
-        loader: 'tslint-loader'
+        loader: 'eslint-loader'
       },
       {
         test: /\.ts$/,

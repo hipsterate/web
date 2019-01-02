@@ -1,12 +1,16 @@
 <template>
-  <el-menu :default-active="activeIndex" mode="horizontal" @select="handleSelect">
+  <el-menu
+    :default-active="activeIndex"
+    mode="horizontal"
+    @select="handleSelect"
+  >
     <el-menu-item index="1">Hipsterate</el-menu-item>
   </el-menu>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
+import Vue from 'vue';
+import Component from 'vue-class-component';
 
 @Component
 export default class NavBar extends Vue {
@@ -17,5 +21,3 @@ export default class NavBar extends Vue {
   }
 }
 </script>
-
-

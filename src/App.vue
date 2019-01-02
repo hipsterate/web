@@ -15,17 +15,20 @@
     </q-layout>
   </q-app>-->
   <NavBar>
-    <router-view class="layout-view content" v-on:toolbarStyle="changeToolbarStyle"></router-view>
+    <router-view
+      class="layout-view content"
+      @:toolbarStyle="changeToolbarStyle"
+    ></router-view>
   </NavBar>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import NavBar from "./components/app/NavBar.vue";
+import Vue from 'vue';
+import Component from 'vue-class-component';
+import NavBar from './components/app/NavBar.vue';
 
 @Component({
-  components: { NavBar }
+  components: { NavBar },
 })
 export default class App extends Vue {
   // data
@@ -34,7 +37,7 @@ export default class App extends Vue {
 
   // lifecycle
   created() {
-    console.log("hello world");
+    console.log('hello world');
     // firebase.onAuthChanged().then(user => {
     //   store.setUser(user);
     // });
