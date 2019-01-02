@@ -10,8 +10,8 @@ module.exports = {
   mode: "production",
   output: {
     path: path.resolve(__dirname, "../dist"),
-    filename: "app.[hash].bundle.js",
-    chunkFilename: "[name].[hash].bundle.js"
+    filename: "app.[hash].js",
+    chunkFilename: "[name].[hash].js"
   },
   devtool: "eval",
   module: {
@@ -27,7 +27,6 @@ module.exports = {
               importLoaders: 2,
               url: false,
               modules: true,
-              minimize: true,
               sourceMap: true
             }
           },

@@ -1,5 +1,5 @@
 <template>
-  <q-app>
+  <!-- <q-app>
     <q-layout :class="{ transperent: isHome }">
       <div slot="header" class="toolbar bg-blue-grey-10">
         <router-link class="go-home" :to="{ name: 'home' }">
@@ -12,82 +12,96 @@
         <button v-else @click="goMe">{{ user.email.split('@')[0] }}</button>
       </div>
 
-      <router-view class="layout-view content" v-on:toolbarStyle="changeToolbarStyle"></router-view>
     </q-layout>
-  </q-app>
+  </q-app>-->
+  <NavBar>
+    <router-view class="layout-view content" v-on:toolbarStyle="changeToolbarStyle"></router-view>
+  </NavBar>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import store from "store";
-import firebase from "utils/firebase";
+import NavBar from "./components/app/NavBar.vue";
 
-@Component
+@Component({
+  components: { NavBar }
+})
 export default class App extends Vue {
-  store = store;
+  // data
+  // store = store;
   isHome = true;
 
+  // lifecycle
   created() {
-    firebase.onAuthChanged().then(user => {
-      store.setUser(user);
-    });
+    console.log("hello world");
+    // firebase.onAuthChanged().then(user => {
+    //   store.setUser(user);
+    // });
   }
-  get user() {
-    return this.store.state.user;
-  }
-  signInDialog() {
-    const vm = this;
 
-    Dialog.create({
-      title: "로그인",
-      message: "로그인 할 계정 타입을 선택해주세요!",
-      stackButtons: true,
-      buttons: [
-        {
-          label: "Google",
-          handler() {
-            console.log("google");
-            vm.signIn("google");
-          }
-        },
-        {
-          label: "Facebook",
-          handler() {
-            vm.signIn("facebook");
-          }
-        }
-      ]
-    });
+  // computed
+  get user() {
+    return null;
+    // return this.store.state.user;
   }
-  signIn(provider) {
-    firebase
-      .signIn(provider)
-      .then(result => {
-        store.setUser(result.user);
-        this.$router.push({ name: "me" });
-      })
-      .catch(error => console.log(error));
+
+  // method
+  signInDialog() {
+    // const vm = this;
+    // Dialog.create({
+    //   title: "로그인",
+    //   message: "로그인 할 계정 타입을 선택해주세요!",
+    //   stackButtons: true,
+    //   buttons: [
+    //     {
+    //       label: "Google",
+    //       handler() {
+    //         console.log("google");
+    //         vm.signIn("google");
+    //       }
+    //     },
+    //     {
+    //       label: "Facebook",
+    //       handler() {
+    //         vm.signIn("facebook");
+    //       }
+    //     }
+    //   ]
+    // });
   }
+
+  signIn() {
+    // firebase
+    //   .signIn(provider)
+    //   .then(result => {
+    //     store.setUser(result.user);
+    //     this.$router.push({ name: "me" });
+    //   })
+    //   .catch(error => console.log(error));
+  }
+
   goMe() {
-    this.$router.push({ name: "me" });
+    // this.$router.push({ name: "me" });
   }
-  changeToolbarStyle(where) {
-    if (where === "home") {
-      this.isHome = true;
-    } else {
-      this.isHome = false;
-    }
+
+  changeToolbarStyle() {
+    // if (where === "home") {
+    //   this.isHome = true;
+    // } else {
+    //   this.isHome = false;
+    // }
   }
 }
 </script>
 
-<style scoped>
-.go-home {
-  color: #fff;
-}
+<style scoped lang="scss">
+// .go-home {
+//   color: #fff;
+// }
 
-.transperent {
-  opacity: 0.7;
-}
+// .transperent {
+//   opacity: 0.7;
+// }
+//
 </style>

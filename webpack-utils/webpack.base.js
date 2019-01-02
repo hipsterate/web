@@ -1,56 +1,56 @@
-const path = require("path");
-const webpack = require("webpack");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const path = require('path');
+const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+// const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
-  entry: path.resolve(__dirname, "../src/main.ts"),
+  entry: path.resolve(__dirname, '../src/main.ts'),
   module: {
     rules: [
       {
-        enforce: "pre",
-        test: /\.tsx?$/,
+        enforce: 'pre',
+        test: /\.(ts|vue)$/,
         exclude: /node_modules/,
-        loader: "tslint-loader"
+        loader: 'tslint-loader'
       },
       {
-        test: /\.tsx?$/,
-        loader: "ts-loader",
-        exclude: /node_modules|vue\/src/,
+        test: /\.ts$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
         options: {
-          appendTsSuffixTo: [/\.vue$/],
-          transpileOnly: true
+          appendTsSuffixTo: [/\.vue$/]
         }
       },
       {
         test: /\.vue$/,
         exclude: /node_modules/,
-        loader: "vue-loader",
-        options: {
-          loaders: {
-            ts: "ts-loader"
-          }
-        }
+        loader: 'vue-loader'
       }
     ]
   },
   resolve: {
     alias: {
-      src: path.resolve(__dirname, "../src/"),
-      vue$: "vue/dist/vue.esm.js"
+      src: path.resolve(__dirname, '../src/'),
+      vue$: 'vue/dist/vue.esm.js'
     },
-    extensions: [".ts", ".tsx", ".js", ".vue"]
+    extensions: ['.ts', '.tsx', '.js', '.vue']
   },
   plugins: [
-    new CleanWebpackPlugin(["../dist"], {
+    new CleanWebpackPlugin(['../dist'], {
       allowExternal: true
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new ForkTsCheckerWebpackPlugin({
-      reportFiles: ["src/**/*.{ts,tsx}"],
-      watch: ["src/**/*.{ts,tsx}"]
-    }),
-    new VueLoaderPlugin()
+    // new ForkTsCheckerWebpackPlugin({
+    //   reportFiles: ["src/**/*.{ts,tsx,vue}"],
+    //   tslint: true,
+    //   watch: ["src/**/*.{ts,tsx,vue}"],
+    //   vue: true
+    // }),
+    new VueLoaderPlugin(),
+    new StyleLintPlugin({
+      files: ['src/**/*.{vue,css,scss}']
+    })
   ]
 };

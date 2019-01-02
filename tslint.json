@@ -1,10 +1,5 @@
 {
   "extends": ["tslint-config-standard"],
-  "jsRules": {
-    "max-line-length": {
-      "options": [80]
-    }
-  },
   "linterOptions": {
     "exclude": ["**/*.js", "**/*.json"]
   },
