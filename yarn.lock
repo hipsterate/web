@@ -3112,6 +3112,11 @@ https-browserify@^1.0.0:
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
   integrity sha1-7AbBDgo0wPL68Zn3/X/Hj//QPHM=
 
+i18n-webpack-plugin@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/i18n-webpack-plugin/-/i18n-webpack-plugin-1.0.0.tgz#0ca12296ec937a4f94325cd0264d08f4e0549831"
+  integrity sha512-WMC2i05OuitjxYmeQU8XV4KJ+CrWnTOY5DwjygRz2dNByezfnTbVbV67qX4I53KHlscSnOsJyv6StuZxmm6J7w==
+
 iconv-lite@0.4.23:
   version "0.4.23"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.23.tgz#297871f63be507adcfbfca715d0cd0eed84e9a63"
@@ -4019,6 +4024,11 @@ markdown-table@^1.1.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/markdown-table/-/markdown-table-1.1.2.tgz#c78db948fa879903a41bce522e3b96f801c63786"
   integrity sha512-NcWuJFHDA8V3wkDgR/j4+gZx+YQwstPgfQDV8ndUeWWzta3dnDTBxpVzqS9lkmJAuV5YX35lmyojl6HO5JXAgw==
+
+material-design-icons-iconfont@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/material-design-icons-iconfont/-/material-design-icons-iconfont-4.0.3.tgz#b2fbcc9828f96e6418b8e475060f866296b714ef"
+  integrity sha512-AB0MlNhhEm4W3M/kejsjZkLUq/HenHJ8fq5TXa7cpnXg8IXWLzO5MCBWTokk8eQ447EbbQnCqUP+xQnVCZ2SZg==
 
 mathml-tag-names@^2.0.1:
   version "2.1.0"
@@ -7398,6 +7408,13 @@ vue@^2.5.21:
   version "2.5.21"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.21.tgz#3d33dcd03bb813912ce894a8303ab553699c4a85"
   integrity sha512-Aejvyyfhn0zjVeLvXd70h4hrE4zZDx1wfZqia6ekkobLmUZ+vNFQer53B4fu0EjWBSiqApxPejzkO1Znt3joxQ==
+
+vuetify-loader@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/vuetify-loader/-/vuetify-loader-1.0.8.tgz#db99b7325d0336acae3970d411bf7237b27d52bf"
+  integrity sha512-JbZhJqKsZCyBVHh7v4J2ECJPplJlYFnLIgEL4WPvOaaW5QWZ1YAZT2iA8AA/TcBD65Cxg3Ky9lr0r/wJtOMo9w==
+  dependencies:
+    loader-utils "^1.1.0"
 
 vuetify@^1.4.0:
   version "1.4.0"

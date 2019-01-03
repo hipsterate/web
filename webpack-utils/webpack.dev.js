@@ -37,7 +37,7 @@ module.exports = {
     rules: [
       {
         test: /\.(sc|c)ss$/,
-        exclude: /node_modules\/(?!(normalize.css|vuetify))/,
+        exclude: /node_modules\/(?!(normalize.css|vuetify|material-design-icons-iconfont))/,
         use: [
           'style-loader',
           { loader: 'css-loader', options: { importLoaders: 2 } },

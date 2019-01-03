@@ -3,6 +3,7 @@ import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import 'normalize.css';
 import 'vuetify/dist/vuetify.min.css';
+import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import App from './App.vue';
 
 Vue.use(Vuetify);

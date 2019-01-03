@@ -5,6 +5,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 
 module.exports = {
   mode: 'production',
@@ -18,7 +19,7 @@ module.exports = {
     rules: [
       {
         test: /\.(sc|c)ss$/,
-        exclude: /node_modules\/(?!(normalize.css|vuetify))/,
+        exclude: /node_modules\/(?!(normalize.css|vuetify|material-design-icons-iconfont))/,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -77,5 +78,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../templates/template.ejs'),
     }),
+    new VuetifyLoaderPlugin(),
   ],
 };

@@ -1,4 +1,5 @@
 <template>
+  <v-app dark> <NavBar /> </v-app>
   <!-- <q-app>
     <q-layout :class="{ transperent: isHome }">
       <div slot="header" class="toolbar bg-blue-grey-10">
@@ -18,7 +19,6 @@
     class="layout-view content"
     @:toolbarStyle="changeToolbarStyle"
   ></router-view>-->
-  <NavBar />
 </template>
 
 <script lang="ts">
