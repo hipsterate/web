@@ -24,10 +24,13 @@
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import NavBar from './app/NavBar.vue';
+import router from './router';
+import { NavBar } from './components/app';
 
 @Component({
+  name: 'App',
   components: { NavBar },
+  router,
 })
 export default class App extends Vue {
   // data
@@ -36,7 +39,6 @@ export default class App extends Vue {
 
   // lifecycle
   created() {
-    console.log('hello world');
     // firebase.onAuthChanged().then(user => {
     //   store.setUser(user);
     // });

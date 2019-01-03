@@ -3,14 +3,15 @@ import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import 'normalize.css';
 import 'vuetify/dist/vuetify.min.css';
-import router from './router';
+import App from './App.vue';
 
 Vue.use(Vuetify);
 Vue.use(VueRouter);
 
 new Vue({
   el: '#app',
-  render: h => h(require('./components/App')),
-  router,
+  components: {
+    App
+  },
+  render: h => h(App),
 });
-
