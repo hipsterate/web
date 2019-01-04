@@ -4,7 +4,7 @@
 
 ## Install
 
-You need [yarn](https://yarnpkg.com/lang/en/)
+You need [yarn](https://yarnpkg.com/lang/en/) and [node v10.15.0 LTS](https://nodejs.org/ko/)
 
 ## Build
 
