@@ -2,7 +2,11 @@
 
 > Rating your last.fm albums!
 
-## Build Setup
+## Install
+
+You need [yarn](https://yarnpkg.com/lang/en/)
+
+## Build
 
 ```bash
 # install dependencies
