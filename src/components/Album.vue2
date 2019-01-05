@@ -1,14 +1,25 @@
 <template>
   <div>
-    <div :id="key" class="album-container" @mouseenter="info = true" @mouseleave="info = false" @touchstart="info = !info">
-
+    <div
+      :id="key"
+      class="album-container"
+      @mouseenter="info = true"
+      @mouseleave="info = false"
+      @touchstart="info = !info"
+    >
       <img class="image" :src="album.image">
 
       <div class="info" v-if="info">
-        <h4 class="artist-title"><a :href="album.lastfmLink" target="_blank">{{ album.artistName }} - {{ album.name }}</a></h4>
+        <h4 class="artist-title">
+          <a :href="album.lastfmLink" target="_blank">{{ album.artistName }} - {{ album.name }}</a>
+        </h4>
 
         <div class="play-count" :class="{ 'display-hidden': !isPlayCount }">
-          <span class="count">{{ album.playCount }}</span><span class="times">time<span v-if="album.playCount > 1">s</span></span>
+          <span class="count">{{ album.playCount }}</span>
+          <span class="times">
+            time
+            <span v-if="album.playCount > 1">s</span>
+          </span>
         </div>
 
         <fieldset class="rating">
@@ -24,19 +35,18 @@
           <i :class="star1" class="star rating1 half" @click="rate(1)"></i>
         </fieldset>
       </div>
-
     </div>
   </div>
 </template>
 
 <script>
-import md5 from 'blueimp-md5'
-import store from 'store'
-import firebase from 'utils/firebase'
+import md5 from "blueimp-md5";
+import store from "store";
+import firebase from "utils/firebase";
 
 export default {
-  props: ['album', 'isPlayCount'],
-  data () {
+  props: ["album", "isPlayCount"],
+  data() {
     return {
       info: false,
       rating: 0,
@@ -50,70 +60,72 @@ export default {
       star3: { selected: false },
       star2: { selected: false },
       star1: { selected: false }
-    }
+    };
   },
   computed: {
-    key () {
-      return md5(`${this.album.artistName}${this.album.name}`)
+    key() {
+      return md5(`${this.album.artistName}${this.album.name}`);
     }
   },
   methods: {
-    rate (rating) {
+    rate(rating) {
       if (this.rating !== rating) {
-        const from = this.rating
-        const to = rating
-        this.$emit('changeRate', this.album, from, to)
+        const from = this.rating;
+        const to = rating;
+        this.$emit("changeRate", this.album, from, to);
       }
 
-      this.rating = rating
+      this.rating = rating;
 
       for (let i of Array(10).keys()) {
         if (i + 1 === rating) {
-          this[`star${i + 1}`].selected = true
-        }
-        else {
-          this[`star${i + 1}`].selected = false
+          this[`star${i + 1}`].selected = true;
+        } else {
+          this[`star${i + 1}`].selected = false;
         }
       }
 
       firebase.createNewAlbumAtomic(this.album, (error, commited, snapshot) => {
-        const newAlbum = Object.assign({}, this.album)
-        newAlbum.rating = rating
-        newAlbum.lastfmUsername = store.state.lastfmUsername
-        newAlbum.updatedAt = firebase.timestamp
-        delete newAlbum.playCount
+        const newAlbum = Object.assign({}, this.album);
+        newAlbum.rating = rating;
+        newAlbum.lastfmUsername = store.state.lastfmUsername;
+        newAlbum.updatedAt = firebase.timestamp;
+        delete newAlbum.playCount;
 
         if (!error) {
-          let updates = {}
-          updates[`/user-albums/${store.state.user.uid}/${this.key}`] = newAlbum
-          updates[`/album-users/${this.key}/${store.state.user.uid}`] = newAlbum
+          let updates = {};
+          updates[
+            `/user-albums/${store.state.user.uid}/${this.key}`
+          ] = newAlbum;
+          updates[
+            `/album-users/${this.key}/${store.state.user.uid}`
+          ] = newAlbum;
 
-          firebase.updateDB(updates)
-          .catch(error => console.log(error))
+          firebase.updateDB(updates).catch(error => console.log(error));
         }
-      })
+      });
     }
   },
-  created () {
-    firebase.getDB(`/user-albums/${store.state.user.uid}/${this.key}`)
-    .then(result => {
-      const value = result.val()
+  created() {
+    firebase
+      .getDB(`/user-albums/${store.state.user.uid}/${this.key}`)
+      .then(result => {
+        const value = result.val();
 
-      if (value) {
-        this.rating = value.rating
+        if (value) {
+          this.rating = value.rating;
 
-        for (let i of Array(10).keys()) {
-          if (i + 1 === value.rating) {
-            this[`star${i + 1}`].selected = true
-          }
-          else {
-            this[`star${i + 1}`].selected = false
+          for (let i of Array(10).keys()) {
+            if (i + 1 === value.rating) {
+              this[`star${i + 1}`].selected = true;
+            } else {
+              this[`star${i + 1}`].selected = false;
+            }
           }
         }
-      }
-    })
+      });
   }
-}
+};
 </script>
 
 <style scoped>
@@ -123,13 +135,13 @@ export default {
   height: 100%;
 }
 
-.album-container>.image {
+.album-container > .image {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-.album-container>.info {
+.album-container > .info {
   position: absolute;
   top: 0;
   left: 0;
@@ -143,7 +155,7 @@ export default {
   opacity: 0.7;
 }
 
-.album-container>.info>.artist-title {
+.album-container > .info > .artist-title {
   height: 10%;
   margin: 0;
 
@@ -152,7 +164,7 @@ export default {
   font-weight: 400;
 }
 
-.album-container>.info>.artist-title>a {
+.album-container > .info > .artist-title > a {
   color: #fff;
 }
 
@@ -160,19 +172,19 @@ export default {
   visibility: hidden;
 }
 
-.album-container>.info>.play-count {
+.album-container > .info > .play-count {
   height: 45%;
   margin: 30% 0 0 0;
   text-align: center;
 }
 
-.album-container>.info>.play-count>.count {
+.album-container > .info > .play-count > .count {
   color: #fff;
   font-size: 1.5em;
   font-weight: 600;
 }
 
-.album-container>.info>.play-count>.times {
+.album-container > .info > .play-count > .times {
   padding-left: 0.3em;
 
   color: #fff;
@@ -188,28 +200,28 @@ export default {
   border: none;
 }
 
-.rating>.star:before {
+.rating > .star:before {
   display: inline-block;
   margin: 0.2em;
-  font-size: 1.20em;
+  font-size: 1.2em;
   font-family: FontAwesome;
   content: "\f005";
 }
 
-.rating>.star.half:before {
+.rating > .star.half:before {
   position: absolute;
   content: "\f089";
 }
 
-.rating>.star {
+.rating > .star {
   float: right;
   cursor: pointer;
 }
 
-.rating>.star.selected,
-.rating>.star.selected~.star,
-.rating>.star:hover,
-.rating>.star:hover~.star {
-  color: #FFD700;
+.rating > .star.selected,
+.rating > .star.selected ~ .star,
+.rating > .star:hover,
+.rating > .star:hover ~ .star {
+  color: #ffd700;
 }
 </style>

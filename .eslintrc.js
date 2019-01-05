@@ -1,31 +1,24 @@
 module.exports = {
   root: true,
-  parserOptions: {
-    sourceType: 'module'
-  },
   env: {
-    browser: true
+    browser: true,
   },
-  globals: {
-    'cordova': true,
-    'DEV': true,
-    'PROD': true,
-    '__THEME': true
-  },
-  // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
-  extends: 'standard',
-  // required to lint *.vue files
-  plugins: [
-    'html'
+  extends: [
+    'standard',
+    'prettier',
+    'prettier/standard',
+    'plugin:vue/recommended',
+    '@vue/prettier',
+    '@vue/typescript',
   ],
-  // add your custom rules here
-  'rules': {
-    // allow paren-less arrow functions
-    'arrow-parens': 0,
-    'one-var': 0,
-    'import/first': 0,
-    // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    'brace-style': [2, 'stroustrup', { 'allowSingleLine': true }]
-  }
-}
+  plugins: ['html', 'standard', 'prettier', 'vue'],
+  parserOptions: {
+    parser: 'typescript-eslint-parser',
+    sourceType: 'module',
+  },
+  rules: {
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
+    'vue/component-name-in-template-casing': 'off',
+  },
+};

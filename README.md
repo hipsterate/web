@@ -2,18 +2,19 @@
 
 > Rating your last.fm albums!
 
-## Build Setup
+## Install
 
-``` bash
+You need [yarn](https://yarnpkg.com/lang/en/) and [node v10.15.0 LTS](https://nodejs.org/ko/)
+
+## Build
+
+```bash
 # install dependencies
-$ npm install
+$ yarn install
 
 # serve with hot reload at localhost:8080
-$ quasar dev
+$ yarn run start
 
 # build for production with minification
-$ quasar build
-
-# lint code
-$ quasar lint
+$ yarn run build
 ```
