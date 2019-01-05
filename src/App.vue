@@ -84,28 +84,5 @@ export default class App extends Vue {
     //   })
     //   .catch(error => console.log(error));
   }
-
-  goMe() {
-    // this.$router.push({ name: "me" });
-  }
-
-  changeToolbarStyle() {
-    // if (where === "home") {
-    //   this.isHome = true;
-    // } else {
-    //   this.isHome = false;
-    // }
-  }
 }
 </script>
-
-<style scoped lang="scss">
-// .go-home {
-//   color: #fff;
-// }
-
-// .transperent {
-//   opacity: 0.7;
-// }
-//
-</style>
