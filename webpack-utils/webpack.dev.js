@@ -30,6 +30,11 @@ module.exports = {
         target: 'https://hipsterate.firebaseio.com',
         secure: false,
       },
+      {
+        context: ['/api'],
+        target: 'http://0.0.0.0:5001',
+        secure: false
+      }
     ],
     quiet: false,
   },
